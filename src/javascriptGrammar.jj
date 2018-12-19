@@ -10,7 +10,7 @@ public class Javascript {
 
 	public static void main(String args[]) throws ParseException{
 			try{
-                InputStream in = new FileInputStream("correct.js");
+                InputStream in = new FileInputStream("express.js");
                 Javascript parser = new Javascript(in);
                 parser.program();
                 System.out.println("Successfully parsed the grammar");
@@ -144,7 +144,13 @@ TOKEN : {
 
 void primaryExpression() : {}
 {
-    <THIS> | <IDENTIFIER_NAME> | literal() | arrayLiteral() | objectLiteral() | functionExpression()
+    <THIS>
+    | <IDENTIFIER_NAME>
+    | literal()
+    | arrayLiteral()
+    | objectLiteral()
+    | functionExpression()
+    | parenthesizedExpression()
 }
 
 void literal() : {}
@@ -192,6 +198,11 @@ void propertyDefinition() : {}
     <IDENTIFIER_NAME> ":" assignmentExpression()
 }
 
+void parenthesizedExpression() : {}
+{
+    "(" expression() ")"
+}
+
 
 
 
@@ -223,62 +234,52 @@ void unaryExpression() : {}
 
 void multiplicativeExpression() : {}
 {
-    (LOOKAHEAD(unaryExpression() ("*" | "/" | "%"))
-        unaryExpression() ("*" | "/" | "%"))* unaryExpression()
+    postFixExpression() (("*" | "/" | "%") multiplicativeExpression())?
 }
 
 void additiveExpression() : {}
 {
-    (LOOKAHEAD(multiplicativeExpression() ("+" | "-"))
-        multiplicativeExpression() ("+" | "-"))* multiplicativeExpression()
+    multiplicativeExpression() (("+" | "-") additiveExpression())?
 }
 
 void shiftExpression() : {}
 {
-    (LOOKAHEAD(additiveExpression() ("<<" | ">>" | ">>>"))
-        additiveExpression() ("<<" | ">>" | ">>>"))* additiveExpression()
+    additiveExpression() (("<<" | ">>" | ">>>") shiftExpression())?
 }
 
 void relationalExpression() : {}
 {
-    (LOOKAHEAD(shiftExpression() ("<" | ">" | "<=" | ">=" | "instanceof" | "in"))
-        shiftExpression() ("<" | ">" | "<=" | ">=" | "instanceof" | "in"))* shiftExpression()
+    shiftExpression() (("<" | ">" | "<=" | ">=" | "instanceof") relationalExpression())?
 }
 
 void equalityExpression() : {}
 {
-    (LOOKAHEAD(relationalExpression() ("==" | "!=" | "===" | "!=="))
-        relationalExpression() ("==" | "!=" | "===" | "!=="))* relationalExpression()
+    relationalExpression() (("==" | "!=" | "===" | "!==") equalityExpression())?
 }
 
 void bitwiseAndExpression() : {}
 {
-    (LOOKAHEAD(equalityExpression() "&")
-        equalityExpression() "&")* equalityExpression()
+    equalityExpression() ("&" bitwiseAndExpression())?
 }
 
 void bitwiseXorExpression() : {}
 {
-    (LOOKAHEAD(bitwiseAndExpression() "^")
-        bitwiseAndExpression() "^")* bitwiseAndExpression()
+    bitwiseAndExpression() ("^" bitwiseXorExpression())?
 }
 
 void bitwiseOrExpression() : {}
 {
-    (LOOKAHEAD(bitwiseXorExpression() "|")
-        bitwiseXorExpression() "|")* bitwiseXorExpression()
+    bitwiseXorExpression() ("|" bitwiseOrExpression())?
 }
 
 void logicalAndExpression() : {}
 {
-    (LOOKAHEAD(bitwiseOrExpression() "&&")
-        bitwiseOrExpression() "&&")* bitwiseOrExpression()
+    bitwiseOrExpression() ("&&" logicalAndExpression())?
 }
 
 void logicalOrExpression() : {}
 {
-    (LOOKAHEAD(logicalAndExpression() "||")
-        logicalAndExpression() "||")* logicalAndExpression()
+    logicalAndExpression() ("||" logicalOrExpression())?
 }
 
 void conditionalExpression() : {}
@@ -288,8 +289,25 @@ void conditionalExpression() : {}
 
 void assignmentExpression() : {}
 {
-    leftSideExpression()
+    LOOKAHEAD(leftSideExpression() ("=" | assignmentOperator())) leftSideExpression() ("=" | assignmentOperator()) assignmentExpression()
+    | conditionalExpression()
 }
+
+void assignmentOperator() : {}
+{
+    "*=" | "/=" | "+=" | "-=" | "%=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|=" | "**="
+}
+
+
+
+
+
+
+
+
+
+
+
 
 void expression() : {}
 {

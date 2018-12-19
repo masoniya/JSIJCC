@@ -15,6 +15,15 @@ see?
 return function(fagoot, pink){
     if(a){
         return b
+        if(a)
+            if(b)
+                if(c) {
+                    go
+                }
+            else
+                dis
+        else
+            ;
     }
     else{
         5
@@ -68,3 +77,5 @@ for(var x in y){
 }
 
 thistatementislabeled : if(fuckyou){ go }
+
+(5)
