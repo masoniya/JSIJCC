@@ -1,6 +1,7 @@
 options {
     BUILD_PARSER = true;
     DEBUG_PARSER = true;
+    DEBUG_TOKEN_MANAGER = false;
 }
 
 PARSER_BEGIN(Javascript)
@@ -10,7 +11,7 @@ public class Javascript {
 
 	public static void main(String args[]) throws ParseException{
 			try{
-                InputStream in = new FileInputStream("express.js");
+                InputStream in = new FileInputStream("condition.js");
                 Javascript parser = new Javascript(in);
                 parser.program();
                 System.out.println("Successfully parsed the grammar");
@@ -198,15 +199,18 @@ void propertyDefinition() : {}
     <IDENTIFIER_NAME> ":" assignmentExpression()
 }
 
+
+
+
+
+
+
+
+
 void parenthesizedExpression() : {}
 {
     "(" expression() ")"
 }
-
-
-
-
-
 
 void leftSideExpression() : {}
 {
@@ -217,10 +221,6 @@ void callExpression() : {}
 {
     primaryExpression()
 }
-
-
-
-
 
 void updateExpression() : {}
 {
@@ -304,17 +304,6 @@ void assignmentOperator() : {}
 {
     "*=" | "/=" | "+=" | "-=" | "%=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|=" | "**="
 }
-
-
-
-
-
-
-
-
-
-
-
 
 void expression() : {}
 {
