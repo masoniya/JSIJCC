@@ -222,24 +222,31 @@ void callExpression() : {}
 
 
 
-void postFixExpression() : {}
+void updateExpression() : {}
 {
-    leftSideExpression()
+    ("++" | "--") leftSideExpression()
+    | LOOKAHEAD(leftSideExpression() ("++" | "--")) leftSideExpression() ("++" | "--")
+    | leftSideExpression()
 }
 
 void unaryExpression() : {}
 {
-    (<DELETE>) leftSideExpression() | (<VOID> | <TYPEOF> | "~" | "!")* postFixExpression()
+    (<DELETE> | <VOID> | <TYPEOF> | "~" | "!" | "-" | "+")* updateExpression()
+}
+
+void exponentiationOperator() : {}
+{
+    unaryExpression() ("**" exponentiationOperator())?
 }
 
 void multiplicativeExpression() : {}
 {
-    postFixExpression() (("*" | "/" | "%") multiplicativeExpression())?
+    exponentiationOperator() (("*" | "/" | "%") multiplicativeExpression())?
 }
 
 void additiveExpression() : {}
 {
-    multiplicativeExpression() (("+" | "-") additiveExpression())?
+    multiplicativeExpression() (LOOKAHEAD("+" | "-")("+" | "-") additiveExpression())?
 }
 
 void shiftExpression() : {}
