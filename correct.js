@@ -72,10 +72,57 @@ for(var x; y ; 50){
 
 }
 
-for(var x in y){
-
-}
-
 thistatementislabeled : if(fuckyou){ go }
 
 (5)
+
+[]
+
+[a]
+
+[,]
+
+[,,,]
+
+[,,,a ,,,]
+
+[a,,,,]
+
+return {
+    kill : 5,
+    die : 4
+}
+
+for(var i = "h" in obj){
+
+}
+
+for(var i = "h" ; i < 5; i++){
+    ;
+}
+
+for(i in obj){
+    donothing
+}
+
+g = f()
+
+e = h(1, 5, faggot)(1, 2, 3)
+
+h = f(1, 5)
+
+a.gh
+
+l = [1, 2, 3]
+
+a = l[0]
+
+a
+
+if(true, false){
+    dosth
+}
+
+a = (a, b, c = 5)
+
+a = b, 5

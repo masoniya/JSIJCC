@@ -11,7 +11,7 @@ public class Javascript {
 
 	public static void main(String args[]) throws ParseException{
 			try{
-                InputStream in = new FileInputStream("condition.js");
+                InputStream in = new FileInputStream("correct.js");
                 Javascript parser = new Javascript(in);
                 parser.program();
                 System.out.println("Successfully parsed the grammar");
@@ -19,15 +19,6 @@ public class Javascript {
                 e.printStackTrace();
 		    }
 	}
-
-	public static boolean isNotEndOfArray() {
-        int i = 1;
-        while(getToken(i).image == ","){
-            i++;
-        }
-        return getToken(i).image != "]";
-    }
-
 
 }
 
@@ -171,7 +162,7 @@ void ellision() : {}
 
 void elementList() : {}
 {
-    arrayElement() ( LOOKAHEAD({ isNotEndOfArray() }) ellision() arrayElement())*
+    arrayElement() ( LOOKAHEAD(ellision() arrayElement()) ellision() arrayElement())*
 }
 
 void arrayElement() : {}
@@ -219,8 +210,30 @@ void leftSideExpression() : {}
 
 void callExpression() : {}
 {
-    primaryExpression()
+    memberExpression() (LOOKAHEAD(arguments()) arguments())*
 }
+
+void arguments() : {}
+{
+    "(" (argumentList())? ")"
+}
+
+void argumentList() : {}
+{
+    assignmentExpression() ("," assignmentExpression())*
+}
+
+void memberExpression() : {}
+{
+    LOOKAHEAD(primaryExpression() "[") primaryExpression() (LOOKAHEAD("[" expression() "]") "[" expression() "]")*
+    | primaryExpression() ("." <IDENTIFIER_NAME>)*
+}
+
+
+
+
+
+
 
 void updateExpression() : {}
 {
@@ -424,7 +437,7 @@ void whileStatement() : {}
 
 void forStatement() : {}
 {
-    <FOR> "(" (LOOKAHEAD(3) forHeader() | forInHeader()) ")" statement()
+    <FOR> "(" (LOOKAHEAD(forInBinding() <IN>) forInHeader() | forHeader() ) ")" statement()
 }
 
 void forHeader() : {}
@@ -444,7 +457,8 @@ void forInHeader() : {}
 
 void forInBinding() : {}
 {
-    <VAR> variableDeclaration()
+    leftSideExpression()
+    | <VAR> variableDeclaration()
 }
 
 void continueStatement() : {}
