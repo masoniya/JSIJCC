@@ -1,6 +1,7 @@
 options {
     BUILD_PARSER = true;
-    DEBUG_PARSER = true;
+    DEBUG_LOOKAHEAD = false;
+    DEBUG_PARSER = false;
     DEBUG_TOKEN_MANAGER = false;
 }
 
@@ -11,13 +12,28 @@ public class Javascript {
 
 	public static void main(String args[]) throws ParseException{
 			try{
-                InputStream in = new FileInputStream("correct.js");
+                InputStream in = new FileInputStream("express.js");
                 Javascript parser = new Javascript(in);
                 parser.program();
                 System.out.println("Successfully parsed the grammar");
 			}catch(IOException e){
                 e.printStackTrace();
 		    }
+	}
+
+	public static boolean forIn = false;
+	public static boolean isRelationalOperator(){
+	    String nextImage = getToken(1).image;
+        switch(nextImage){
+            case "in" : return !forIn;
+            case "<" :
+            case ">" :
+            case "<=" :
+            case ">=" :
+            case "instanceof" : return true;
+            default : return false;
+        }
+
 	}
 
 }
@@ -269,7 +285,7 @@ void shiftExpression() : {}
 
 void relationalExpression() : {}
 {
-    shiftExpression() (("<" | ">" | "<=" | ">=" | "instanceof") relationalExpression())?
+    shiftExpression() (LOOKAHEAD({ isRelationalOperator() })("<" | ">" | "<=" | ">=" | "instanceof" | "in") relationalExpression())?
 }
 
 void equalityExpression() : {}
@@ -437,7 +453,7 @@ void whileStatement() : {}
 
 void forStatement() : {}
 {
-    <FOR> "(" (LOOKAHEAD(forInBinding() <IN>) forInHeader() | forHeader() ) ")" statement()
+    <FOR> "(" (LOOKAHEAD(forHeader()) forHeader() | forInHeader() ) ")" statement()
 }
 
 void forHeader() : {}
@@ -452,7 +468,7 @@ void forInitializer() : {}
 
 void forInHeader() : {}
 {
-    forInBinding() <IN> expression()
+    { forIn = true; } forInBinding() <IN>  { forIn = false; } expression()
 }
 
 void forInBinding() : {}
