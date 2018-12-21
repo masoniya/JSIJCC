@@ -1,0 +1,584 @@
+options {
+    STATIC = true;
+
+    BUILD_TOKEN_MANAGER = true;
+    DEBUG_TOKEN_MANAGER = false;
+    BUILD_PARSER = true;
+    DEBUG_PARSER = false;
+    DEBUG_LOOKAHEAD = false; //not very useful
+
+    VISITOR = true;
+    MULTI = true;
+    //VISITOR_DATA_TYPE //most likely gonna be used as map to pass context
+    //VISITOR_RETURN_TYPE //might be used for return type of expressions
+
+    OUTPUT_DIRECTORY = "javascriptParser\\parser";
+    JJTREE_OUTPUT_DIRECTORY = "javascriptParser\\tree";
+    NODE_PACKAGE = "javascriptParser.tree";
+    OUTPUT_FILE = "../../javascriptGrammar.jj";
+
+}
+
+PARSER_BEGIN(Javascript)
+
+package javascriptParser.parser;
+
+import java.io.*;
+
+public class Javascript {
+
+	public static void main(String args[]) throws ParseException{
+			try{
+                InputStream in = new FileInputStream("scripts/expression.js");
+                Javascript parser = new Javascript(in);
+                SimpleNode s = parser.program();
+                System.out.println("Successfully parsed the grammar. Found no syntax errors. Starting interpreter...");
+                InterpretationVisitor v = new InterpretationVisitor();
+                s.jjtAccept(v, null);
+                System.out.println("Program terminated successfully");
+			}catch(IOException e){
+                e.printStackTrace();
+		    }
+	}
+
+	public static boolean forIn = false;
+	public static boolean isRelationalOperator(){
+	    String nextImage = getToken(1).image;
+        switch(nextImage){
+            case "in" : return !forIn;
+            case "<" :
+            case ">" :
+            case "<=" :
+            case ">=" :
+            case "instanceof" : return true;
+            default : return false;
+        }
+	}
+
+}
+
+PARSER_END(Javascript)
+
+
+MORE : {
+    "/*" : IN_MULTI_LINE_COMMENT
+|   "//" : IN_SINGLE_LINE_COMMENT
+}
+
+<IN_MULTI_LINE_COMMENT>
+MORE : {
+    < ~[] >
+}
+
+<IN_MULTI_LINE_COMMENT>
+SPECIAL_TOKEN : {
+    <MULTI_LINE_COMMENT : "*/"> : DEFAULT
+}
+
+<IN_SINGLE_LINE_COMMENT>
+MORE : {
+    < ~["\n", "\r"] >
+}
+
+<IN_SINGLE_LINE_COMMENT>
+SPECIAL_TOKEN : {
+    <SINGLE_LINE_COMMENT : <LINE_TERMINATOR>> : DEFAULT
+}
+
+
+SKIP : {
+    <WHITE_SPACE : " " | "\t" | "\f">
+|   <LINE_TERMINATOR : "\n" | "\r">
+}
+
+
+TOKEN : {
+	<RESERVED : "await" | "class" | "const" | "debugger" | "export" | "extends" | "import" |
+	            "super" | "with" | "yield">
+|   <FUTURE_RESERVED : "enum">
+}
+
+
+TOKEN : {
+    <BREAK : "break">
+|   <CASE : "case">
+|   <CATCH : "catch">
+|   <CONTINUE : "continue">
+|   <DFLT : "default">
+|   <DELETE : "delete">
+|   <DO : "do">
+|   <ELSE : "else">
+|   <FINALLY : "finally">
+|   <FOR : "for">
+|   <FUNCTION : "function">
+|   <IF : "if">
+|   <IN : "in">
+|   <INSTANCEOF : "instanceof">
+|   <NEW : "new">
+|   <RETURN : "return">
+|   <SWITCH : "switch">
+|   <THIS : "this">
+|   <THROW : "throw">
+|   <TRY : "try">
+|   <TYPEOF: "typeof">
+|   <VAR : "var">
+|   <VOID : "void">
+|   <WHILE : "while">
+}
+
+
+TOKEN : {
+    <NULL_LITERAL : "null">
+|   <BOOLEAN_LITERAL : "true" | "false">
+|   <STRING_LITERAL : "\"" ( ("\\" ["r", "n", "t", "b", "f", "\\", "\""]) | (~["\"", "\\", "\n", "\r"]) )*  "\"" >
+}
+
+
+TOKEN : {
+    <NUMERIC_LITERAL : <DECIMAL_LITERAL> | <BINARY_INTEGER_LITERAL> | <OCTAL_INTEGER_LITERAL> | <HEX_INTEGER_LITERAL>>
+
+|   <#DECIMAL_LITERAL : (<DECIMAL_INTEGER_LITERAL> |
+                         <DECIMAL_INTEGER_LITERAL> "." (<DECIMAL_DIGITS>)? |
+                         "." <DECIMAL_DIGITS>) (<EXPONENT_PART>)?>
+
+|   <#EXPONENT_PART : ["e", "E"] (["+", "-"])? <DECIMAL_DIGITS>>
+
+|   <#DECIMAL_INTEGER_LITERAL : "0" | <NON_ZERO_DIGIT> (<DECIMAL_DIGITS>)?>
+|   <#BINARY_INTEGER_LITERAL : "0" (["b","B"]) <BINARY_DIGITS>>
+|   <#OCTAL_INTEGER_LITERAL : "0" (["o","O"]) <OCTAL_DIGITS>>
+|   <#HEX_INTEGER_LITERAL : "0" ["X","x"] <HEX_DIGITS>>
+
+|   <#NON_ZERO_DIGIT: ["1"-"9"]>
+
+|   <#DECIMAL_DIGITS : (<DECIMAL_DIGIT>)+>
+|   <#BINARY_DIGITS : (<BINARY_DIGIT>)+>
+|   <#OCTAL_DIGITS : (<OCTAL_DIGIT>)+>
+|   <#HEX_DIGITS : (<HEX_DIGIT>)+>
+
+|   <#DECIMAL_DIGIT : ["0"-"9"]>
+|   <#BINARY_DIGIT : ["0","1"]>
+|   <#OCTAL_DIGIT : ["0"-"8"]>
+|   <#HEX_DIGIT : ["0"-"9", "A"-"F"]>
+}
+
+TOKEN : {
+    <IDENTIFIER_NAME : (["a"-"z"] | ["A"-"Z"] | "_" | "$") (["a" - "z"] | ["A"-"Z"] | ["0" -"9"] | "_" | "$")*>
+}
+
+
+
+
+
+void primaryExpression() : {}
+{
+    <THIS>
+    | <IDENTIFIER_NAME>
+    | literal()
+    | arrayLiteral()
+    | objectLiteral()
+    | functionExpression()
+    | parenthesizedExpression()
+}
+
+void literal() : {}
+{
+    <NULL_LITERAL> | <BOOLEAN_LITERAL> | <NUMERIC_LITERAL> | <STRING_LITERAL>
+}
+
+void arrayLiteral() : {}
+{
+    "[" (ellision())? (elementList() (ellision())?)? "]"
+}
+
+void ellision() #void : {}
+{
+    (",")+
+}
+
+void elementList() #void : {}
+{
+    arrayElement() ( LOOKAHEAD(ellision() arrayElement()) ellision() arrayElement())*
+}
+
+void arrayElement() #void : {}
+{
+    assignmentExpression() | spreadElement()
+}
+
+void spreadElement() : {}
+{
+    "..." assignmentExpression()
+}
+
+void objectLiteral() : {}
+{
+    "{" (propertyDefinitionList() )? "}"
+}
+
+void propertyDefinitionList() #void : {}
+{
+    propertyDefinition() ("," propertyDefinition())*
+}
+
+void propertyDefinition() : {}
+{
+    <IDENTIFIER_NAME> ":" assignmentExpression()
+}
+
+
+
+
+
+
+
+
+
+void parenthesizedExpression() : {}
+{
+    "(" expression() ")"
+}
+
+void leftSideExpression() : {}
+{
+    callExpression()
+}
+
+void callExpression() : {}
+{
+    memberExpression() (LOOKAHEAD(arguments()) arguments())*
+}
+
+void arguments() : {}
+{
+    "(" (argumentList())? ")"
+}
+
+void argumentList() #void : {}
+{
+    assignmentExpression() ("," assignmentExpression())*
+}
+
+void memberExpression() : {}
+{
+    LOOKAHEAD(primaryExpression() "[") primaryExpression() (LOOKAHEAD("[" expression() "]") "[" expression() "]")*
+    | primaryExpression() ("." <IDENTIFIER_NAME>)*
+}
+
+
+
+
+
+
+
+void updateExpression() : {}
+{
+    ("++" | "--") leftSideExpression()
+    | LOOKAHEAD(leftSideExpression() ("++" | "--")) leftSideExpression() ("++" | "--")
+    | leftSideExpression()
+}
+
+void unaryExpression() : {}
+{
+    (<DELETE> | <VOID> | <TYPEOF> | "~" | "!" | "-" | "+")* updateExpression()
+}
+
+void exponentiationOperator() : {}
+{
+    unaryExpression() ("**" exponentiationOperator())?
+}
+
+void multiplicativeExpression() : {}
+{
+    exponentiationOperator() (("*" | "/" | "%") multiplicativeExpression())?
+}
+
+void additiveExpression() : {}
+{
+    multiplicativeExpression() (LOOKAHEAD("+" | "-")("+" | "-") additiveExpression())?
+}
+
+void shiftExpression() : {}
+{
+    additiveExpression() (("<<" | ">>" | ">>>") shiftExpression())?
+}
+
+void relationalExpression() : {}
+{
+    shiftExpression() (LOOKAHEAD({ isRelationalOperator() })("<" | ">" | "<=" | ">=" | "instanceof" | "in") relationalExpression())?
+}
+
+void equalityExpression() : {}
+{
+    relationalExpression() (("==" | "!=" | "===" | "!==") equalityExpression())?
+}
+
+void bitwiseAndExpression() : {}
+{
+    equalityExpression() ("&" bitwiseAndExpression())?
+}
+
+void bitwiseXorExpression() : {}
+{
+    bitwiseAndExpression() ("^" bitwiseXorExpression())?
+}
+
+void bitwiseOrExpression() : {}
+{
+    bitwiseXorExpression() ("|" bitwiseOrExpression())?
+}
+
+void logicalAndExpression() : {}
+{
+    bitwiseOrExpression() ("&&" logicalAndExpression())?
+}
+
+void logicalOrExpression() : {}
+{
+    logicalAndExpression() ("||" logicalOrExpression())?
+}
+
+void conditionalExpression() : {}
+{
+    logicalOrExpression() ("?" assignmentExpression() ":" assignmentExpression())?
+}
+
+void assignmentExpression() : {}
+{
+    LOOKAHEAD(leftSideExpression() ("=" | assignmentOperator())) leftSideExpression() ("=" | assignmentOperator()) assignmentExpression()
+    | conditionalExpression()
+}
+
+void assignmentOperator() #void : {}
+{
+    "*=" | "/=" | "+=" | "-=" | "%=" | "<<=" | ">>=" | ">>>=" | "&=" | "^=" | "|=" | "**="
+}
+
+void expression() : {}
+{
+    assignmentExpression() ("," assignmentExpression())*
+}
+
+void functionExpression() : {}
+{
+    LOOKAHEAD(2) namedFunction() | anonymousFunction()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+void statement() : {}
+{
+    emptyStatement()
+    |variableDefinition()
+    |LOOKAHEAD("{") block()
+    |LOOKAHEAD(<IDENTIFIER_NAME> ":")labeledStatement()
+    |ifStatement()
+    |switchStatement()
+    |doStatement()
+    |whileStatement()
+    |forStatement()
+    |continueStatement()
+    |breakStatement()
+    |returnStatement()
+    |throwStatement()
+    |tryStatement()
+    |expressionStatement()
+
+}
+
+void emptyStatement() : {}
+{
+    ";"
+}
+
+void expressionStatement() : {}
+{
+    expression()
+}
+
+void variableDefinition() : {}
+{
+    <VAR> variableDeclarationList()
+}
+
+void variableDeclarationList() : {}
+{
+    variableDeclaration() ("," variableDeclaration())*
+}
+
+void variableDeclaration() : {}
+{
+    <IDENTIFIER_NAME> ("=" assignmentExpression())?
+}
+
+void block() : {}
+{
+    "{" (statement())* "}"
+}
+
+void labeledStatement() : {}
+{
+    <IDENTIFIER_NAME> ":" (LOOKAHEAD({ getToken(1).image != "function" }) statement() | namedFunction())
+}
+
+void ifStatement() : {}
+{
+    <IF> "(" expression() ")" statement() (LOOKAHEAD(2) <ELSE> statement())?
+}
+
+void switchStatement() : {}
+{
+    <SWITCH> "(" expression() ")" caseBlock()
+}
+
+void caseBlock() : {}
+{
+    "{" (caseClauses())? (defaultClause() (caseClauses())?)? "}"
+}
+
+void caseClauses() : {}
+{
+    (caseClause())+
+}
+
+void caseClause() : {}
+{
+    <CASE> expression() ":" (statement())*
+}
+
+void defaultClause() : {}
+{
+    <DFLT> ":" (statement())*
+}
+
+void doStatement() : {}
+{
+    <DO> statement() <WHILE> "(" expression() ")"
+}
+
+void whileStatement() : {}
+{
+    <WHILE> "(" expression() ")" statement()
+}
+
+void forStatement() : {}
+{
+    <FOR> "(" (LOOKAHEAD(forHeader()) forHeader() | forInHeader() ) ")" statement()
+}
+
+void forHeader() : {}
+{
+    (forInitializer())? ";" (expression())? ";" (expression())?
+}
+
+void forInitializer() : {}
+{
+    expression() | <VAR> variableDeclarationList()
+}
+
+void forInHeader() : {}
+{
+    { forIn = true; } forInBinding() <IN>  { forIn = false; } expression()
+}
+
+void forInBinding() : {}
+{
+    leftSideExpression()
+    | <VAR> variableDeclaration()
+}
+
+void continueStatement() : {}
+{
+    <CONTINUE> (LOOKAHEAD(2) <IDENTIFIER_NAME>)?
+}
+
+void breakStatement() : {}
+{
+    <BREAK> (LOOKAHEAD(2) <IDENTIFIER_NAME>)?
+}
+
+void returnStatement() : {}
+{
+    <RETURN> (LOOKAHEAD(2) expression())?
+}
+
+void throwStatement() : {}
+{
+    <THROW> expression()
+}
+
+void tryStatement() : {}
+{
+    <TRY> block() (catchClauses())? (finallyClause())?
+}
+
+void catchClauses() : {}
+{
+    (catchClause())+
+}
+
+void catchClause() : {}
+{
+    <CATCH> "(" <IDENTIFIER_NAME> ")" block()
+}
+
+void finallyClause() : {}
+{
+    <FINALLY> block()
+}
+
+
+
+
+
+
+
+
+void namedFunction() : {}
+{
+    "function" <IDENTIFIER_NAME> "(" (formalParameters())? ")" "{" (functionBody())? "}"
+}
+
+void anonymousFunction() : {}
+{
+    "function" "(" (formalParameters())? ")" "{" (functionBody())? "}"
+}
+
+void formalParameters() : {}
+{
+    <IDENTIFIER_NAME> ("," <IDENTIFIER_NAME>)*
+}
+
+void functionBody() : {}
+{
+    topStatements()
+}
+
+void topStatement() : {}
+{
+    LOOKAHEAD({ getToken(1).image != "function" }) statement() | namedFunction()
+}
+
+void topStatements() : {}
+{
+    (topStatement())+
+}
+
+SimpleNode program() : {Token t = null;}
+{
+    topStatements() <EOF>
+
+    {
+        return jjtThis;
+    }
+}
+
