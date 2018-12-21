@@ -9,37 +9,25 @@ options {
 
     VISITOR = true;
     MULTI = true;
+    TRACK_TOKENS = true;
     //VISITOR_DATA_TYPE //most likely gonna be used as map to pass context
     //VISITOR_RETURN_TYPE //might be used for return type of expressions
 
-    OUTPUT_DIRECTORY = "javascriptParser\\parser";
-    JJTREE_OUTPUT_DIRECTORY = "javascriptParser\\tree";
-    NODE_PACKAGE = "javascriptParser.tree";
+    OUTPUT_DIRECTORY = "javascriptInterpreter\\parser";
+    JJTREE_OUTPUT_DIRECTORY = "javascriptInterpreter\\tree";
+    NODE_PACKAGE = "javascriptInterpreter.tree";
     OUTPUT_FILE = "../../javascriptGrammar.jj";
 
 }
 
 PARSER_BEGIN(Javascript)
 
-package javascriptParser.parser;
+package javascriptInterpreter.parser;
 
 import java.io.*;
+import javascriptInterpreter.visitors.*;
 
 public class Javascript {
-
-	public static void main(String args[]) throws ParseException{
-			try{
-                InputStream in = new FileInputStream("scripts/expression.js");
-                Javascript parser = new Javascript(in);
-                SimpleNode s = parser.program();
-                System.out.println("Successfully parsed the grammar. Found no syntax errors. Starting interpreter...");
-                InterpretationVisitor v = new InterpretationVisitor();
-                s.jjtAccept(v, null);
-                System.out.println("Program terminated successfully");
-			}catch(IOException e){
-                e.printStackTrace();
-		    }
-	}
 
 	public static boolean forIn = false;
 	public static boolean isRelationalOperator(){
