@@ -9,6 +9,9 @@ public interface JavascriptVisitor
   public Object visit(ASTprimaryExpression node, Object data);
   public Object visit(ASTliteral node, Object data);
   public Object visit(ASTarrayLiteral node, Object data);
+  public Object visit(ASTellision node, Object data);
+  public Object visit(ASTelementList node, Object data);
+  public Object visit(ASTarrayElement node, Object data);
   public Object visit(ASTspreadElement node, Object data);
   public Object visit(ASTobjectLiteral node, Object data);
   public Object visit(ASTpropertyDefinition node, Object data);
@@ -72,4 +75,4 @@ public interface JavascriptVisitor
   public Object visit(ASTtopStatements node, Object data);
   public Object visit(ASTprogram node, Object data);
 }
-/* JavaCC - OriginalChecksum=eadaf102668b34aba422e0990618718e (do not edit this line) */
+/* JavaCC - OriginalChecksum=9ff57024437d8523459c2a83e1d9cdb3 (do not edit this line) */

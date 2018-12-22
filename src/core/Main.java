@@ -14,6 +14,7 @@ public class Main {
             SimpleNode s = parser.program();
             System.out.println("Successfully parsed the grammar");
             ExecutionVisitor v = new ExecutionVisitor();
+            Context scope = new Context();
             s.jjtAccept(v, null);
             System.out.println("Successfully executed the program");
         }catch(IOException e){

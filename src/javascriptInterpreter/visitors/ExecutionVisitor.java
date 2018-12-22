@@ -231,7 +231,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
                         first = (ASTforInitializer) forHeader.jjtGetChild(0);
 
                         //has child 2 no 3
-                        if(first.jjtGetLastToken().next.next.image.equals(";")){
+                        if(!first.jjtGetLastToken().next.next.image.equals(";")){
                             second = (ASTexpression) forHeader.jjtGetChild(1);
                         }
                         //has child 3 no 2
@@ -293,7 +293,9 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
                         third.jjtAccept(v, data);
                     }
 
+                    //update condition
                     if(second != null){
+                        System.out.println("I have a condition");
                         x = (double)second.jjtAccept(v, data);
                         conditionResult = JSToJavaUtils.doubleToBoolean(x);
                     }

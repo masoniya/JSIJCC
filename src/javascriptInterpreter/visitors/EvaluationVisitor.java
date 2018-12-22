@@ -2,21 +2,28 @@ package javascriptInterpreter.visitors;
 
 import javascriptInterpreter.tree.*;
 
+import java.util.ArrayList;
+
 import static javascriptInterpreter.tree.JavascriptTreeConstants.*;
 
 public class EvaluationVisitor extends JavascriptDefaultVisitor {
 
-    public Object visit(ASTprimaryExpression node, Object data){
+    public Object visit(ASTprimaryExpression node, Object data) {
         if(node.jjtGetNumChildren() == 0){
-            return 69.0;
+            if(node.jjtGetFirstToken().image.equals("this")){
+                return 69.0;
+            }
+            else {
+                return 69.0;
+            }
         }
         Node child = node.jjtGetChild(0);
         switch(child.getId()){
-            case JJTLITERAL : return visit((ASTliteral) child, data);
-            case JJTPARENTHESIZEDEXPRESSION : return visit((ASTparenthesizedExpression) child, data);
-            case JJTARRAYLITERAL : return visit((ASTarrayLiteral) child, data);
-            case JJTOBJECTLITERAL : return visit((ASTobjectLiteral) child, data);
-            case JJTFUNCTIONEXPRESSION : return 69.0;
+            case JJTLITERAL : return child.jjtAccept(this, data);
+            case JJTPARENTHESIZEDEXPRESSION : return child.jjtAccept(this, data);
+            case JJTARRAYLITERAL : return child.jjtAccept(this, data);
+            case JJTOBJECTLITERAL : return child.jjtAccept(this, data);
+            case JJTFUNCTIONEXPRESSION : return child.jjtAccept(this, data);
         }
         return 69.0;
     }
@@ -26,14 +33,24 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
     }
 
     public Object visit(ASTarrayLiteral node, Object data){
+        ArrayList<JavascriptType> arrayLiteral = new ArrayList<>();
+
+
         return 69.0;
     }
+
+    public Object visit(ASTarrayElement node, Object data){
+
+
+        return defaultVisit(node, data);
+    }
+
     public Object visit(ASTobjectLiteral node, Object data){
         return 69.0;
     }
 
     public Object visit(ASTfunctionExpression node, Object data){
-        return defaultVisit(node, data);
+        return 69.0;
     }
 
     public Object visit(ASTparenthesizedExpression node, Object data){

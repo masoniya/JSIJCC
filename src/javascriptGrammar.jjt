@@ -11,7 +11,7 @@ options {
     VISITOR = true;
     MULTI = true;
     TRACK_TOKENS = true;
-    //VISITOR_DATA_TYPE //most likely gonna be used as map to pass context
+    VISITOR_DATA_TYPE = javascriptInterpreter.visitors.Context;
     //VISITOR_RETURN_TYPE //might be used for return type of expressions
 
     JJTREE_OUTPUT_DIRECTORY = "javascriptInterpreter\\tree";
@@ -180,17 +180,17 @@ void arrayLiteral() : {}
     "[" (ellision())? (elementList() (ellision())?)? "]"
 }
 
-void ellision() #void : {}
+void ellision() : {}
 {
     (",")+
 }
 
-void elementList() #void : {}
+void elementList() : {}
 {
     arrayElement() ( LOOKAHEAD(ellision() arrayElement()) ellision() arrayElement())*
 }
 
-void arrayElement() #void : {}
+void arrayElement() : {}
 {
     assignmentExpression() | spreadElement()
 }

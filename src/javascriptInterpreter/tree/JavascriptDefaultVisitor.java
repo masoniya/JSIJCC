@@ -20,6 +20,15 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
   public Object visit(ASTarrayLiteral node, Object data){
     return defaultVisit(node, data);
   }
+  public Object visit(ASTellision node, Object data){
+    return defaultVisit(node, data);
+  }
+  public Object visit(ASTelementList node, Object data){
+    return defaultVisit(node, data);
+  }
+  public Object visit(ASTarrayElement node, Object data){
+    return defaultVisit(node, data);
+  }
   public Object visit(ASTspreadElement node, Object data){
     return defaultVisit(node, data);
   }
@@ -207,4 +216,4 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
     return defaultVisit(node, data);
   }
 }
-/* JavaCC - OriginalChecksum=ef2a3bf78126434987dde9ac9347b5e6 (do not edit this line) */
+/* JavaCC - OriginalChecksum=c49f2ea799c08561e9c29fe7d2205584 (do not edit this line) */
