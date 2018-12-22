@@ -215,18 +215,20 @@ void propertyDefinition() : {}
     <IDENTIFIER_NAME> ":" assignmentExpression()
 }
 
-
-
-
-
-
-
-
+void functionExpression() : {}
+{
+    LOOKAHEAD(2) namedFunction() | anonymousFunction()
+}
 
 void parenthesizedExpression() : {}
 {
     "(" expression() ")"
 }
+
+
+
+
+
 
 void leftSideExpression() : {}
 {
@@ -353,10 +355,7 @@ void expression() : {}
     assignmentExpression() ("," assignmentExpression())*
 }
 
-void functionExpression() : {}
-{
-    LOOKAHEAD(2) namedFunction() | anonymousFunction()
-}
+
 
 
 
@@ -477,7 +476,7 @@ void forHeader() : {}
 
 void forInitializer() : {}
 {
-    expression() | <VAR> variableDeclarationList()
+    expression() | variableDefinition()
 }
 
 void forInHeader() : {}

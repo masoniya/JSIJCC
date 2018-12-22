@@ -12,6 +12,7 @@ public interface JavascriptVisitor
   public Object visit(ASTspreadElement node, Object data);
   public Object visit(ASTobjectLiteral node, Object data);
   public Object visit(ASTpropertyDefinition node, Object data);
+  public Object visit(ASTfunctionExpression node, Object data);
   public Object visit(ASTparenthesizedExpression node, Object data);
   public Object visit(ASTleftSideExpression node, Object data);
   public Object visit(ASTcallExpression node, Object data);
@@ -34,7 +35,6 @@ public interface JavascriptVisitor
   public Object visit(ASTconditionalExpression node, Object data);
   public Object visit(ASTassignmentExpression node, Object data);
   public Object visit(ASTexpression node, Object data);
-  public Object visit(ASTfunctionExpression node, Object data);
   public Object visit(ASTstatement node, Object data);
   public Object visit(ASTemptyStatement node, Object data);
   public Object visit(ASTexpressionStatement node, Object data);
@@ -72,4 +72,4 @@ public interface JavascriptVisitor
   public Object visit(ASTtopStatements node, Object data);
   public Object visit(ASTprogram node, Object data);
 }
-/* JavaCC - OriginalChecksum=441fea06e2ee1154adb9d9c216ef4cd2 (do not edit this line) */
+/* JavaCC - OriginalChecksum=eadaf102668b34aba422e0990618718e (do not edit this line) */

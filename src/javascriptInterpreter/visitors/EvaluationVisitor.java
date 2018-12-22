@@ -8,14 +8,37 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
 
     public Object visit(ASTprimaryExpression node, Object data){
         if(node.jjtGetNumChildren() == 0){
-            return 69;
+            return 69.0;
         }
         Node child = node.jjtGetChild(0);
-        return visit((ASTliteral) child, data);
+        switch(child.getId()){
+            case JJTLITERAL : return visit((ASTliteral) child, data);
+            case JJTPARENTHESIZEDEXPRESSION : return visit((ASTparenthesizedExpression) child, data);
+            case JJTARRAYLITERAL : return visit((ASTarrayLiteral) child, data);
+            case JJTOBJECTLITERAL : return visit((ASTobjectLiteral) child, data);
+            case JJTFUNCTIONEXPRESSION : return 69.0;
+        }
+        return 69.0;
     }
 
     public Object visit(ASTliteral node, Object data){
         return Double.parseDouble(node.jjtGetFirstToken().image);
+    }
+
+    public Object visit(ASTarrayLiteral node, Object data){
+        return 69.0;
+    }
+    public Object visit(ASTobjectLiteral node, Object data){
+        return 69.0;
+    }
+
+    public Object visit(ASTfunctionExpression node, Object data){
+        return defaultVisit(node, data);
+    }
+
+    public Object visit(ASTparenthesizedExpression node, Object data){
+        ASTexpression child = (ASTexpression)node.jjtGetChild(0);
+        return visit(child, data);
     }
 
 
@@ -45,9 +68,9 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
 
     public Object visit(ASTupdateExpression node, Object data){
         ASTleftSideExpression operand = (ASTleftSideExpression)node.jjtGetChild(0);
-        if(node.jjtGetNumChildren() > 1){
-            Double x = (Double)visit(operand, data);
-            String operator = "";
+        if(node.jjtGetFirstToken() != operand.jjtGetFirstToken()){
+            double x = (double)visit(operand, data);
+            String operator;
             //postfix update
             if(node.jjtGetLastToken().image.equals("++") || node.jjtGetLastToken().image.equals("--")){
                 operator = node.jjtGetLastToken().image;
@@ -72,16 +95,16 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
 
     public Object visit(ASTunaryExpression node, Object data){
         ASTupdateExpression operand = (ASTupdateExpression)node.jjtGetChild(0);
-        if(node.jjtGetNumChildren() > 1){
-            Double x = (Double)visit(operand, data);
-            String operator = ((SimpleNode)node.jjtGetChild(0)).jjtGetLastToken().next.image;
-            System.out.println(operator + " " + x);
+        if(node.jjtGetFirstToken() != operand.jjtGetFirstToken()){
+            double x = (double)visit(operand, data);
+            String operator = node.jjtGetFirstToken().image;
+            System.out.print(operator + " " + x);
             switch(operator){
                 case "+" : return +x;
                 case "-" : return -x;
-                case "!" : return x == 0 ? 1 : 0;
-                case "~" : return ~x.intValue();
-                default : return 69;
+                case "!" : return !JSToJavaUtils.doubleToBoolean(x);
+                case "~" : return (double) ~(int)x;
+                default : return 69.0;
             }
         }
         return visit(operand, data);
@@ -91,10 +114,10 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
         ASTunaryExpression firstOperand = (ASTunaryExpression)node.jjtGetChild(0);
         if(node.jjtGetNumChildren() > 1){
             ASTexponentiationOperator secondOperand = (ASTexponentiationOperator)node.jjtGetChild(1);
-            Double x = (Double)visit(firstOperand, data);
-            Double y = (Double)visit(secondOperand, data);
+            double x = (double)visit(firstOperand, data);
+            double y = (double)visit(secondOperand, data);
             String operator = ((SimpleNode)node.jjtGetChild(0)).jjtGetLastToken().next.image;
-            System.out.println(x + " " + operator + " " + y);
+            System.out.print(x + " " + operator + " " + y + " = ");
             switch(operator){
                 case "**" : return Math.pow(x, y);
             }
@@ -106,14 +129,18 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
         ASTexponentiationOperator firstOperand = (ASTexponentiationOperator)node.jjtGetChild(0);
         if(node.jjtGetNumChildren() > 1){
             ASTmultiplicativeExpression secondOperand = (ASTmultiplicativeExpression)node.jjtGetChild(1);
-            Double x = (Double)visit(firstOperand, data);
-            Double y = (Double)visit(secondOperand, data);
+            double x = (double)visit(firstOperand, data);
+            double y = (double)visit(secondOperand, data);
             String operator = ((SimpleNode)node.jjtGetChild(0)).jjtGetLastToken().next.image;
-            System.out.println(x + " " + operator + " " + y);
+            System.out.print(x + " " + operator + " " + y + " = ");
+            double result;
             switch(operator){
-                case "*" : return x * y;
-                case "/" : return x / y;
-                case "%" : return x % y;
+                case "*" :
+                    System.out.println(x * y); return x * y;
+                case "/" :
+                    System.out.println(x / y); return x / y;
+                case "%" :
+                    System.out.println(x % y); return x % y;
             }
         }
         return visit(firstOperand, data);
@@ -123,10 +150,10 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
         ASTmultiplicativeExpression firstOperand = (ASTmultiplicativeExpression)node.jjtGetChild(0);
         if(node.jjtGetNumChildren() > 1){
             ASTadditiveExpression secondOperand = (ASTadditiveExpression)node.jjtGetChild(1);
-            Double x = (Double)visit(firstOperand, data);
-            Double y = (Double)visit(secondOperand, data);
+            double x = (double)visit(firstOperand, data);
+            double y = (double)visit(secondOperand, data);
             String operator = ((SimpleNode)node.jjtGetChild(0)).jjtGetLastToken().next.image;
-            System.out.println(x + " " + operator + " " + y);
+            System.out.print(x + " " + operator + " " + y + " = ");
             switch(operator){
                 case "+" :
                     System.out.println(x + y); return x + y;
@@ -135,6 +162,61 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
             }
         }
         return visit(firstOperand, data);
+    }
+
+    public Object visit(ASTshiftExpression node, Object data){
+        ASTadditiveExpression child = (ASTadditiveExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTrelationalExpression node, Object data){
+        ASTshiftExpression child = (ASTshiftExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTequalityExpression node, Object data){
+        ASTrelationalExpression child = (ASTrelationalExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTbitwiseAndExpression node, Object data){
+        ASTequalityExpression child = (ASTequalityExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTbitwiseXorExpression node, Object data){
+        ASTbitwiseAndExpression child = (ASTbitwiseAndExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTbitwiseOrExpression node, Object data){
+        ASTbitwiseXorExpression child = (ASTbitwiseXorExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTlogicalAndExpression node, Object data){
+        ASTbitwiseOrExpression child = (ASTbitwiseOrExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTlogicalOrExpression node, Object data){
+        ASTlogicalAndExpression child = (ASTlogicalAndExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTconditionalExpression node, Object data){
+        ASTlogicalOrExpression child = (ASTlogicalOrExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTassignmentExpression node, Object data){
+        ASTconditionalExpression child = (ASTconditionalExpression)node.jjtGetChild(0);
+        return visit(child, data);
+    }
+
+    public Object visit(ASTexpression node, Object data){
+        ASTassignmentExpression child = (ASTassignmentExpression)node.jjtGetChild(0);
+        return visit(child, data);
     }
 
 }

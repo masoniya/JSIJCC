@@ -20,4 +20,6 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+    public static int loopTicks = 5;
 }

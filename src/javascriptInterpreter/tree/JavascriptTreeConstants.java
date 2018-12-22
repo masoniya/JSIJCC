@@ -12,29 +12,29 @@ public interface JavascriptTreeConstants
   public int JJTSPREADELEMENT = 4;
   public int JJTOBJECTLITERAL = 5;
   public int JJTPROPERTYDEFINITION = 6;
-  public int JJTPARENTHESIZEDEXPRESSION = 7;
-  public int JJTLEFTSIDEEXPRESSION = 8;
-  public int JJTCALLEXPRESSION = 9;
-  public int JJTARGUMENTS = 10;
-  public int JJTNEWEXPRESSION = 11;
-  public int JJTMEMBEREXPRESSION = 12;
-  public int JJTUPDATEEXPRESSION = 13;
-  public int JJTUNARYEXPRESSION = 14;
-  public int JJTEXPONENTIATIONOPERATOR = 15;
-  public int JJTMULTIPLICATIVEEXPRESSION = 16;
-  public int JJTADDITIVEEXPRESSION = 17;
-  public int JJTSHIFTEXPRESSION = 18;
-  public int JJTRELATIONALEXPRESSION = 19;
-  public int JJTEQUALITYEXPRESSION = 20;
-  public int JJTBITWISEANDEXPRESSION = 21;
-  public int JJTBITWISEXOREXPRESSION = 22;
-  public int JJTBITWISEOREXPRESSION = 23;
-  public int JJTLOGICALANDEXPRESSION = 24;
-  public int JJTLOGICALOREXPRESSION = 25;
-  public int JJTCONDITIONALEXPRESSION = 26;
-  public int JJTASSIGNMENTEXPRESSION = 27;
-  public int JJTEXPRESSION = 28;
-  public int JJTFUNCTIONEXPRESSION = 29;
+  public int JJTFUNCTIONEXPRESSION = 7;
+  public int JJTPARENTHESIZEDEXPRESSION = 8;
+  public int JJTLEFTSIDEEXPRESSION = 9;
+  public int JJTCALLEXPRESSION = 10;
+  public int JJTARGUMENTS = 11;
+  public int JJTNEWEXPRESSION = 12;
+  public int JJTMEMBEREXPRESSION = 13;
+  public int JJTUPDATEEXPRESSION = 14;
+  public int JJTUNARYEXPRESSION = 15;
+  public int JJTEXPONENTIATIONOPERATOR = 16;
+  public int JJTMULTIPLICATIVEEXPRESSION = 17;
+  public int JJTADDITIVEEXPRESSION = 18;
+  public int JJTSHIFTEXPRESSION = 19;
+  public int JJTRELATIONALEXPRESSION = 20;
+  public int JJTEQUALITYEXPRESSION = 21;
+  public int JJTBITWISEANDEXPRESSION = 22;
+  public int JJTBITWISEXOREXPRESSION = 23;
+  public int JJTBITWISEOREXPRESSION = 24;
+  public int JJTLOGICALANDEXPRESSION = 25;
+  public int JJTLOGICALOREXPRESSION = 26;
+  public int JJTCONDITIONALEXPRESSION = 27;
+  public int JJTASSIGNMENTEXPRESSION = 28;
+  public int JJTEXPRESSION = 29;
   public int JJTSTATEMENT = 30;
   public int JJTEMPTYSTATEMENT = 31;
   public int JJTEXPRESSIONSTATEMENT = 32;
@@ -81,6 +81,7 @@ public interface JavascriptTreeConstants
     "spreadElement",
     "objectLiteral",
     "propertyDefinition",
+    "functionExpression",
     "parenthesizedExpression",
     "leftSideExpression",
     "callExpression",
@@ -103,7 +104,6 @@ public interface JavascriptTreeConstants
     "conditionalExpression",
     "assignmentExpression",
     "expression",
-    "functionExpression",
     "statement",
     "emptyStatement",
     "expressionStatement",
@@ -142,4 +142,4 @@ public interface JavascriptTreeConstants
     "program",
   };
 }
-/* JavaCC - OriginalChecksum=b6ce9ad98a33760c60f87da7782bd462 (do not edit this line) */
+/* JavaCC - OriginalChecksum=e31d90a00148e5256d78935bbb7edde7 (do not edit this line) */

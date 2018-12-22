@@ -29,6 +29,9 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
   public Object visit(ASTpropertyDefinition node, Object data){
     return defaultVisit(node, data);
   }
+  public Object visit(ASTfunctionExpression node, Object data){
+    return defaultVisit(node, data);
+  }
   public Object visit(ASTparenthesizedExpression node, Object data){
     return defaultVisit(node, data);
   }
@@ -46,7 +49,7 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
   }
   public Object visit(ASTmemberExpression node, Object data){
     return defaultVisit(node, data);
-}
+  }
   public Object visit(ASTupdateExpression node, Object data){
     return defaultVisit(node, data);
   }
@@ -93,9 +96,6 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
     return defaultVisit(node, data);
   }
   public Object visit(ASTexpression node, Object data){
-    return defaultVisit(node, data);
-  }
-  public Object visit(ASTfunctionExpression node, Object data){
     return defaultVisit(node, data);
   }
   public Object visit(ASTstatement node, Object data){
@@ -207,4 +207,4 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
     return defaultVisit(node, data);
   }
 }
-/* JavaCC - OriginalChecksum=f063d88a6b991ece9f165640d5eafafc (do not edit this line) */
+/* JavaCC - OriginalChecksum=ef2a3bf78126434987dde9ac9347b5e6 (do not edit this line) */
