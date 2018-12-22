@@ -41,9 +41,12 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
   public Object visit(ASTarguments node, Object data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTmemberExpression node, Object data){
+  public Object visit(ASTnewExpression node, Object data){
     return defaultVisit(node, data);
   }
+  public Object visit(ASTmemberExpression node, Object data){
+    return defaultVisit(node, data);
+}
   public Object visit(ASTupdateExpression node, Object data){
     return defaultVisit(node, data);
   }
@@ -204,4 +207,4 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
     return defaultVisit(node, data);
   }
 }
-/* JavaCC - OriginalChecksum=86c77549a63b0dde78d3f7750e6185db (do not edit this line) */
+/* JavaCC - OriginalChecksum=f063d88a6b991ece9f165640d5eafafc (do not edit this line) */

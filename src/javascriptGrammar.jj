@@ -6,15 +6,15 @@
     DEBUG_TOKEN_MANAGER = false;
     BUILD_PARSER = true;
     DEBUG_PARSER = false;
-    DEBUG_LOOKAHEAD = false;                  
+    DEBUG_LOOKAHEAD = false; //not very useful
+    OUTPUT_DIRECTORY = "javascriptInterpreter\\parser";
 
                    
                  
                         
-    //VISITOR_DATA_TYPE //most likely gonna be used as map to pass context
-    //VISITOR_RETURN_TYPE //might be used for return type of expressions
+                                                                          
+                                                                        
 
-    OUTPUT_DIRECTORY = "javascriptInterpreter\\parser";
                                                             
                                                 
                                                
@@ -124,7 +124,9 @@ TOKEN : {
 TOKEN : {
     <NULL_LITERAL : "null">
 |   <BOOLEAN_LITERAL : "true" | "false">
-|   <STRING_LITERAL : "\"" ( ("\\" ["r", "n", "t", "b", "f", "\\", "\""]) | (~["\"", "\\", "\n", "\r"]) )*  "\"" >
+|   <STRING_LITERAL : <DOUBLE_QUOTES_STRING> | <SINGLE_QUOTES_STRING>>
+|   <#DOUBLE_QUOTES_STRING : "\"" ( ("\\" ["r", "n", "t", "b", "f", "\\", "\""]) | (~["\"", "\\", "\n", "\r"]) )*  "\"">
+|   <#SINGLE_QUOTES_STRING : "'" ( ("\\" ["r", "n", "t", "b", "f", "\\", "'"]) | (~["'", "\\", "\n", "\r"]) )*  "'">
 }
 
 
@@ -311,7 +313,7 @@ void objectLiteral() : {/*@bgen(jjtree) objectLiteral */
 {/*@bgen(jjtree) objectLiteral */
     try {
 /*@egen*/
-    "{" (propertyDefinitionList() )? "}"/*@bgen(jjtree)*/
+    "{" (propertyDefinitionList() )? (",")? "}"/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -337,7 +339,7 @@ void objectLiteral() : {/*@bgen(jjtree) objectLiteral */
 
 void propertyDefinitionList()       : {}
 {
-    propertyDefinition() ("," propertyDefinition())*
+    propertyDefinition() (LOOKAHEAD({ getToken(1).image.equals(",") && !getToken(2).image.equals("}") }) "," propertyDefinition())*
 }
 
 void propertyDefinition() : {/*@bgen(jjtree) propertyDefinition */
@@ -423,7 +425,7 @@ void leftSideExpression() : {/*@bgen(jjtree) leftSideExpression */
 {/*@bgen(jjtree) leftSideExpression */
     try {
 /*@egen*/
-    callExpression()/*@bgen(jjtree)*/
+    LOOKAHEAD({ !getToken(1).image.equals("new") }) callExpression() | newExpression()/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -518,17 +520,16 @@ void argumentList()       : {}
     assignmentExpression() ("," assignmentExpression())*
 }
 
-void memberExpression() : {/*@bgen(jjtree) memberExpression */
-  ASTmemberExpression jjtn000 = new ASTmemberExpression(JJTMEMBEREXPRESSION);
+void newExpression() : {/*@bgen(jjtree) newExpression */
+  ASTnewExpression jjtn000 = new ASTnewExpression(JJTNEWEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
   jjtn000.jjtSetFirstToken(getToken(1));
 /*@egen*/}
-{/*@bgen(jjtree) memberExpression */
+{/*@bgen(jjtree) newExpression */
     try {
 /*@egen*/
-    LOOKAHEAD(primaryExpression() "[") primaryExpression() (LOOKAHEAD("[" expression() "]") "[" expression() "]")*
-    | primaryExpression() ("." <IDENTIFIER_NAME>)*/*@bgen(jjtree)*/
+    (LOOKAHEAD(<NEW>) <NEW>)* memberExpression()/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -551,6 +552,42 @@ void memberExpression() : {/*@bgen(jjtree) memberExpression */
     }
 /*@egen*/
 }
+
+void memberExpression() : {/*@bgen(jjtree) memberExpression */
+  ASTmemberExpression jjtn000 = new ASTmemberExpression(JJTMEMBEREXPRESSION);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+  jjtn000.jjtSetFirstToken(getToken(1));
+/*@egen*/}
+{/*@bgen(jjtree) memberExpression */
+    try {
+/*@egen*/
+    <NEW> memberExpression() arguments()
+    | primaryExpression() ( (LOOKAHEAD("[" expression() "]") "[" expression() "]")+ | ("." <IDENTIFIER_NAME>)*  )/*@bgen(jjtree)*/
+    } catch (Throwable jjte000) {
+      if (jjtc000) {
+        jjtree.clearNodeScope(jjtn000);
+        jjtc000 = false;
+      } else {
+        jjtree.popNode();
+      }
+      if (jjte000 instanceof RuntimeException) {
+        throw (RuntimeException)jjte000;
+      }
+      if (jjte000 instanceof ParseException) {
+        throw (ParseException)jjte000;
+      }
+      throw (Error)jjte000;
+    } finally {
+      if (jjtc000) {
+        jjtree.closeNodeScope(jjtn000, true);
+        jjtn000.jjtSetLastToken(getToken(0));
+      }
+    }
+/*@egen*/
+}
+
+
 
 
 

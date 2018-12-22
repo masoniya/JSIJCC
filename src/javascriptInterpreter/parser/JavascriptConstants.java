@@ -77,39 +77,43 @@ public interface JavascriptConstants {
   /** RegularExpression Id. */
   int STRING_LITERAL = 37;
   /** RegularExpression Id. */
-  int NUMERIC_LITERAL = 38;
+  int DOUBLE_QUOTES_STRING = 38;
   /** RegularExpression Id. */
-  int DECIMAL_LITERAL = 39;
+  int SINGLE_QUOTES_STRING = 39;
   /** RegularExpression Id. */
-  int EXPONENT_PART = 40;
+  int NUMERIC_LITERAL = 40;
   /** RegularExpression Id. */
-  int DECIMAL_INTEGER_LITERAL = 41;
+  int DECIMAL_LITERAL = 41;
   /** RegularExpression Id. */
-  int BINARY_INTEGER_LITERAL = 42;
+  int EXPONENT_PART = 42;
   /** RegularExpression Id. */
-  int OCTAL_INTEGER_LITERAL = 43;
+  int DECIMAL_INTEGER_LITERAL = 43;
   /** RegularExpression Id. */
-  int HEX_INTEGER_LITERAL = 44;
+  int BINARY_INTEGER_LITERAL = 44;
   /** RegularExpression Id. */
-  int NON_ZERO_DIGIT = 45;
+  int OCTAL_INTEGER_LITERAL = 45;
   /** RegularExpression Id. */
-  int DECIMAL_DIGITS = 46;
+  int HEX_INTEGER_LITERAL = 46;
   /** RegularExpression Id. */
-  int BINARY_DIGITS = 47;
+  int NON_ZERO_DIGIT = 47;
   /** RegularExpression Id. */
-  int OCTAL_DIGITS = 48;
+  int DECIMAL_DIGITS = 48;
   /** RegularExpression Id. */
-  int HEX_DIGITS = 49;
+  int BINARY_DIGITS = 49;
   /** RegularExpression Id. */
-  int DECIMAL_DIGIT = 50;
+  int OCTAL_DIGITS = 50;
   /** RegularExpression Id. */
-  int BINARY_DIGIT = 51;
+  int HEX_DIGITS = 51;
   /** RegularExpression Id. */
-  int OCTAL_DIGIT = 52;
+  int DECIMAL_DIGIT = 52;
   /** RegularExpression Id. */
-  int HEX_DIGIT = 53;
+  int BINARY_DIGIT = 53;
   /** RegularExpression Id. */
-  int IDENTIFIER_NAME = 54;
+  int OCTAL_DIGIT = 54;
+  /** RegularExpression Id. */
+  int HEX_DIGIT = 55;
+  /** RegularExpression Id. */
+  int IDENTIFIER_NAME = 56;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -158,6 +162,8 @@ public interface JavascriptConstants {
     "\"null\"",
     "<BOOLEAN_LITERAL>",
     "<STRING_LITERAL>",
+    "<DOUBLE_QUOTES_STRING>",
+    "<SINGLE_QUOTES_STRING>",
     "<NUMERIC_LITERAL>",
     "<DECIMAL_LITERAL>",
     "<EXPONENT_PART>",

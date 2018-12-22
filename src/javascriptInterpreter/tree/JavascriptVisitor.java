@@ -16,6 +16,7 @@ public interface JavascriptVisitor
   public Object visit(ASTleftSideExpression node, Object data);
   public Object visit(ASTcallExpression node, Object data);
   public Object visit(ASTarguments node, Object data);
+  public Object visit(ASTnewExpression node, Object data);
   public Object visit(ASTmemberExpression node, Object data);
   public Object visit(ASTupdateExpression node, Object data);
   public Object visit(ASTunaryExpression node, Object data);
@@ -71,4 +72,4 @@ public interface JavascriptVisitor
   public Object visit(ASTtopStatements node, Object data);
   public Object visit(ASTprogram node, Object data);
 }
-/* JavaCC - OriginalChecksum=f27866f0fad69c854e83c18b6e1ebac1 (do not edit this line) */
+/* JavaCC - OriginalChecksum=441fea06e2ee1154adb9d9c216ef4cd2 (do not edit this line) */

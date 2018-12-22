@@ -16,60 +16,61 @@ public interface JavascriptTreeConstants
   public int JJTLEFTSIDEEXPRESSION = 8;
   public int JJTCALLEXPRESSION = 9;
   public int JJTARGUMENTS = 10;
-  public int JJTMEMBEREXPRESSION = 11;
-  public int JJTUPDATEEXPRESSION = 12;
-  public int JJTUNARYEXPRESSION = 13;
-  public int JJTEXPONENTIATIONOPERATOR = 14;
-  public int JJTMULTIPLICATIVEEXPRESSION = 15;
-  public int JJTADDITIVEEXPRESSION = 16;
-  public int JJTSHIFTEXPRESSION = 17;
-  public int JJTRELATIONALEXPRESSION = 18;
-  public int JJTEQUALITYEXPRESSION = 19;
-  public int JJTBITWISEANDEXPRESSION = 20;
-  public int JJTBITWISEXOREXPRESSION = 21;
-  public int JJTBITWISEOREXPRESSION = 22;
-  public int JJTLOGICALANDEXPRESSION = 23;
-  public int JJTLOGICALOREXPRESSION = 24;
-  public int JJTCONDITIONALEXPRESSION = 25;
-  public int JJTASSIGNMENTEXPRESSION = 26;
-  public int JJTEXPRESSION = 27;
-  public int JJTFUNCTIONEXPRESSION = 28;
-  public int JJTSTATEMENT = 29;
-  public int JJTEMPTYSTATEMENT = 30;
-  public int JJTEXPRESSIONSTATEMENT = 31;
-  public int JJTVARIABLEDEFINITION = 32;
-  public int JJTVARIABLEDECLARATIONLIST = 33;
-  public int JJTVARIABLEDECLARATION = 34;
-  public int JJTBLOCK = 35;
-  public int JJTLABELEDSTATEMENT = 36;
-  public int JJTIFSTATEMENT = 37;
-  public int JJTSWITCHSTATEMENT = 38;
-  public int JJTCASEBLOCK = 39;
-  public int JJTCASECLAUSES = 40;
-  public int JJTCASECLAUSE = 41;
-  public int JJTDEFAULTCLAUSE = 42;
-  public int JJTDOSTATEMENT = 43;
-  public int JJTWHILESTATEMENT = 44;
-  public int JJTFORSTATEMENT = 45;
-  public int JJTFORHEADER = 46;
-  public int JJTFORINITIALIZER = 47;
-  public int JJTFORINHEADER = 48;
-  public int JJTFORINBINDING = 49;
-  public int JJTCONTINUESTATEMENT = 50;
-  public int JJTBREAKSTATEMENT = 51;
-  public int JJTRETURNSTATEMENT = 52;
-  public int JJTTHROWSTATEMENT = 53;
-  public int JJTTRYSTATEMENT = 54;
-  public int JJTCATCHCLAUSES = 55;
-  public int JJTCATCHCLAUSE = 56;
-  public int JJTFINALLYCLAUSE = 57;
-  public int JJTNAMEDFUNCTION = 58;
-  public int JJTANONYMOUSFUNCTION = 59;
-  public int JJTFORMALPARAMETERS = 60;
-  public int JJTFUNCTIONBODY = 61;
-  public int JJTTOPSTATEMENT = 62;
-  public int JJTTOPSTATEMENTS = 63;
-  public int JJTPROGRAM = 64;
+  public int JJTNEWEXPRESSION = 11;
+  public int JJTMEMBEREXPRESSION = 12;
+  public int JJTUPDATEEXPRESSION = 13;
+  public int JJTUNARYEXPRESSION = 14;
+  public int JJTEXPONENTIATIONOPERATOR = 15;
+  public int JJTMULTIPLICATIVEEXPRESSION = 16;
+  public int JJTADDITIVEEXPRESSION = 17;
+  public int JJTSHIFTEXPRESSION = 18;
+  public int JJTRELATIONALEXPRESSION = 19;
+  public int JJTEQUALITYEXPRESSION = 20;
+  public int JJTBITWISEANDEXPRESSION = 21;
+  public int JJTBITWISEXOREXPRESSION = 22;
+  public int JJTBITWISEOREXPRESSION = 23;
+  public int JJTLOGICALANDEXPRESSION = 24;
+  public int JJTLOGICALOREXPRESSION = 25;
+  public int JJTCONDITIONALEXPRESSION = 26;
+  public int JJTASSIGNMENTEXPRESSION = 27;
+  public int JJTEXPRESSION = 28;
+  public int JJTFUNCTIONEXPRESSION = 29;
+  public int JJTSTATEMENT = 30;
+  public int JJTEMPTYSTATEMENT = 31;
+  public int JJTEXPRESSIONSTATEMENT = 32;
+  public int JJTVARIABLEDEFINITION = 33;
+  public int JJTVARIABLEDECLARATIONLIST = 34;
+  public int JJTVARIABLEDECLARATION = 35;
+  public int JJTBLOCK = 36;
+  public int JJTLABELEDSTATEMENT = 37;
+  public int JJTIFSTATEMENT = 38;
+  public int JJTSWITCHSTATEMENT = 39;
+  public int JJTCASEBLOCK = 40;
+  public int JJTCASECLAUSES = 41;
+  public int JJTCASECLAUSE = 42;
+  public int JJTDEFAULTCLAUSE = 43;
+  public int JJTDOSTATEMENT = 44;
+  public int JJTWHILESTATEMENT = 45;
+  public int JJTFORSTATEMENT = 46;
+  public int JJTFORHEADER = 47;
+  public int JJTFORINITIALIZER = 48;
+  public int JJTFORINHEADER = 49;
+  public int JJTFORINBINDING = 50;
+  public int JJTCONTINUESTATEMENT = 51;
+  public int JJTBREAKSTATEMENT = 52;
+  public int JJTRETURNSTATEMENT = 53;
+  public int JJTTHROWSTATEMENT = 54;
+  public int JJTTRYSTATEMENT = 55;
+  public int JJTCATCHCLAUSES = 56;
+  public int JJTCATCHCLAUSE = 57;
+  public int JJTFINALLYCLAUSE = 58;
+  public int JJTNAMEDFUNCTION = 59;
+  public int JJTANONYMOUSFUNCTION = 60;
+  public int JJTFORMALPARAMETERS = 61;
+  public int JJTFUNCTIONBODY = 62;
+  public int JJTTOPSTATEMENT = 63;
+  public int JJTTOPSTATEMENTS = 64;
+  public int JJTPROGRAM = 65;
 
 
   public String[] jjtNodeName = {
@@ -84,6 +85,7 @@ public interface JavascriptTreeConstants
     "leftSideExpression",
     "callExpression",
     "arguments",
+    "newExpression",
     "memberExpression",
     "updateExpression",
     "unaryExpression",
@@ -140,4 +142,4 @@ public interface JavascriptTreeConstants
     "program",
   };
 }
-/* JavaCC - OriginalChecksum=8c3aeb2c445f514dfafd3e530e7a5b32 (do not edit this line) */
+/* JavaCC - OriginalChecksum=b6ce9ad98a33760c60f87da7782bd462 (do not edit this line) */

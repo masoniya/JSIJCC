@@ -6,6 +6,7 @@ options {
     BUILD_PARSER = true;
     DEBUG_PARSER = false;
     DEBUG_LOOKAHEAD = false; //not very useful
+    OUTPUT_DIRECTORY = "javascriptInterpreter\\parser";
 
     VISITOR = true;
     MULTI = true;
@@ -13,7 +14,6 @@ options {
     //VISITOR_DATA_TYPE //most likely gonna be used as map to pass context
     //VISITOR_RETURN_TYPE //might be used for return type of expressions
 
-    OUTPUT_DIRECTORY = "javascriptInterpreter\\parser";
     JJTREE_OUTPUT_DIRECTORY = "javascriptInterpreter\\tree";
     NODE_PACKAGE = "javascriptInterpreter.tree";
     OUTPUT_FILE = "../../javascriptGrammar.jj";
@@ -118,7 +118,9 @@ TOKEN : {
 TOKEN : {
     <NULL_LITERAL : "null">
 |   <BOOLEAN_LITERAL : "true" | "false">
-|   <STRING_LITERAL : "\"" ( ("\\" ["r", "n", "t", "b", "f", "\\", "\""]) | (~["\"", "\\", "\n", "\r"]) )*  "\"" >
+|   <STRING_LITERAL : <DOUBLE_QUOTES_STRING> | <SINGLE_QUOTES_STRING>>
+|   <#DOUBLE_QUOTES_STRING : "\"" ( ("\\" ["r", "n", "t", "b", "f", "\\", "\""]) | (~["\"", "\\", "\n", "\r"]) )*  "\"">
+|   <#SINGLE_QUOTES_STRING : "'" ( ("\\" ["r", "n", "t", "b", "f", "\\", "'"]) | (~["'", "\\", "\n", "\r"]) )*  "'">
 }
 
 
@@ -200,12 +202,12 @@ void spreadElement() : {}
 
 void objectLiteral() : {}
 {
-    "{" (propertyDefinitionList() )? "}"
+    "{" (propertyDefinitionList() )? (",")? "}"
 }
 
 void propertyDefinitionList() #void : {}
 {
-    propertyDefinition() ("," propertyDefinition())*
+    propertyDefinition() (LOOKAHEAD({ getToken(1).image.equals(",") && !getToken(2).image.equals("}") }) "," propertyDefinition())*
 }
 
 void propertyDefinition() : {}
@@ -228,7 +230,7 @@ void parenthesizedExpression() : {}
 
 void leftSideExpression() : {}
 {
-    callExpression()
+    LOOKAHEAD({ !getToken(1).image.equals("new") }) callExpression() | newExpression()
 }
 
 void callExpression() : {}
@@ -246,10 +248,15 @@ void argumentList() #void : {}
     assignmentExpression() ("," assignmentExpression())*
 }
 
+void newExpression() : {}
+{
+    (LOOKAHEAD(<NEW>) <NEW>)* memberExpression()
+}
+
 void memberExpression() : {}
 {
-    LOOKAHEAD(primaryExpression() "[") primaryExpression() (LOOKAHEAD("[" expression() "]") "[" expression() "]")*
-    | primaryExpression() ("." <IDENTIFIER_NAME>)*
+    <NEW> memberExpression() arguments()
+    | primaryExpression() ( (LOOKAHEAD("[" expression() "]") "[" expression() "]")+ | ("." <IDENTIFIER_NAME>)*  )
 }
 
 
