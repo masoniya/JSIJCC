@@ -5,6 +5,10 @@ import java.util.HashMap;
 public class Context {
     private HashMap<String, JavascriptType> scope;
 
+    public Context(){
+        scope = new HashMap<>();
+    }
+
     public JavascriptType getValue(String name) {
         return scope.get(name);
     }

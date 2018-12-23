@@ -16,10 +16,10 @@ class ASTcaseBlock extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=dda47fc468dd38d30b766521a4c3c6f3 (do not edit this line) */
+/* JavaCC - OriginalChecksum=f5781aedc02312dacbfb5b35cafddbbc (do not edit this line) */

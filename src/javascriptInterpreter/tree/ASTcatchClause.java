@@ -16,10 +16,10 @@ class ASTcatchClause extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=a881e9c0b791bbe5452c1084ee05dd5f (do not edit this line) */
+/* JavaCC - OriginalChecksum=bada85a90c690be87dbf77412f8019e6 (do not edit this line) */

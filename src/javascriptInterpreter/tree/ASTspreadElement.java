@@ -16,10 +16,10 @@ class ASTspreadElement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=f963fca1e03c8cfe177de4de6729bdec (do not edit this line) */
+/* JavaCC - OriginalChecksum=feb8901f0f1bb8c48b6c2fb4a5ead176 (do not edit this line) */

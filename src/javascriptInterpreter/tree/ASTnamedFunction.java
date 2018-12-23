@@ -16,10 +16,10 @@ class ASTnamedFunction extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=118e5c7d9d4aab0fc1196c3f557fb5f7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=87d50de6f7194b8b1e7c9b689f1430a3 (do not edit this line) */

@@ -16,10 +16,10 @@ class ASTfunctionBody extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=a0c0f7f90b907258569e243c6b2ef317 (do not edit this line) */
+/* JavaCC - OriginalChecksum=92c75efde14b14fb3e807b8f0dec43ab (do not edit this line) */

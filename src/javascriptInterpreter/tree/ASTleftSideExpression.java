@@ -16,10 +16,10 @@ class ASTleftSideExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=e2fd7c4cded3d4caf2ef14ab6fccf72a (do not edit this line) */
+/* JavaCC - OriginalChecksum=db67e64a7ab88e18a60cf459e012ef7d (do not edit this line) */

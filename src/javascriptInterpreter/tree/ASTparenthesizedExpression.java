@@ -16,10 +16,10 @@ class ASTparenthesizedExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=7186ed64025fd81897957e608b564d4a (do not edit this line) */
+/* JavaCC - OriginalChecksum=d3b8ca0e5e533e875d61631a49f3a2ec (do not edit this line) */

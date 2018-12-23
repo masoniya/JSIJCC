@@ -16,10 +16,10 @@ class ASTexponentiationOperator extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=8ee37ac80b7d554757fff12674eba6e3 (do not edit this line) */
+/* JavaCC - OriginalChecksum=95008aa1950d9eec44bed452cdaa321a (do not edit this line) */

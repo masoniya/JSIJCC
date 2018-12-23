@@ -16,10 +16,10 @@ class ASTforHeader extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=b9e0224007aa28b65dbba6144b3abe35 (do not edit this line) */
+/* JavaCC - OriginalChecksum=b4a912acdfef9fdb92bf4f52b1ea64f6 (do not edit this line) */

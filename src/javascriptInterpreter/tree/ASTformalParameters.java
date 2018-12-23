@@ -16,10 +16,10 @@ class ASTformalParameters extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=c38a1709a0e8fb328e77bd1061fecbb5 (do not edit this line) */
+/* JavaCC - OriginalChecksum=6059c6cb00274c3dfd7e9490c6bc0cdc (do not edit this line) */

@@ -16,10 +16,10 @@ class ASTbreakStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=c7ff96a84645fe37059d83452e250677 (do not edit this line) */
+/* JavaCC - OriginalChecksum=08c5157522c0b84bdc98942ff0b3ac18 (do not edit this line) */

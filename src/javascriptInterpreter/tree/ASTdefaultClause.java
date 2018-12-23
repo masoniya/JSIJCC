@@ -16,10 +16,10 @@ class ASTdefaultClause extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=31911af449ecadbe281a1f1c9a3354bc (do not edit this line) */
+/* JavaCC - OriginalChecksum=d3366c325b85e3d2380074326a23732b (do not edit this line) */

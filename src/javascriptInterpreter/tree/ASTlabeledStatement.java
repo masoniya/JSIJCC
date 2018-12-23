@@ -16,10 +16,10 @@ class ASTlabeledStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=9f757d41650d432989b44b2a905edf7c (do not edit this line) */
+/* JavaCC - OriginalChecksum=c1efbe00be5e74d145ebe20b8a54ebe5 (do not edit this line) */

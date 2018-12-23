@@ -16,10 +16,10 @@ class ASTbitwiseXorExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=ed6c56f6573e12588798a455a936b1a8 (do not edit this line) */
+/* JavaCC - OriginalChecksum=02a738d6962fa06f7507a4c89dbd2176 (do not edit this line) */

@@ -9,27 +9,30 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
 
-    public Object visit(ASTstatement node, Object data){
+    public Object visit(ASTstatement node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
 
-    public Object visit(ASTemptyStatement node, Object data){
+    public Object visit(ASTemptyStatement node, Context data){
         return null;
     }
 
-
-
-    public Object visit(ASTblock node, Object data){
+    public Object visit(ASTblock node, Context data){
         if(node.jjtGetNumChildren() > 0){
             node.childrenAccept(this, data);
         }
         return null;
     }
 
+    public Object visit(ASTvariableDefinition node, Context data){
+        DeclarationVisitor v = new DeclarationVisitor();
+        return node.jjtAccept(v, data);
+    }
 
 
-    public Object visit(ASTifStatement node, Object data){
+
+    public Object visit(ASTifStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(0);
         EvaluationVisitor v = new EvaluationVisitor();
         double x = (double)condition.jjtAccept(v, data);
@@ -54,7 +57,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
     }
 
     @SuppressWarnings("Duplicates")
-    public Object visit(ASTswitchStatement node, Object data){
+    public Object visit(ASTswitchStatement node, Context data){
 
         ASTcaseBlock caseBlock = (ASTcaseBlock) node.jjtGetChild(1);
         boolean matchedCase = false;
@@ -164,7 +167,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         return null;
     }
 
-    public Object visit(ASTdoStatement node, Object data){
+    public Object visit(ASTdoStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(1);
         EvaluationVisitor v = new EvaluationVisitor();
         double x;
@@ -182,7 +185,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         return null;
     }
 
-    public Object visit(ASTwhileStatement node, Object data){
+    public Object visit(ASTwhileStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(0);
         EvaluationVisitor v = new EvaluationVisitor();
         double x = (double)condition.jjtAccept(v, data);
@@ -200,7 +203,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
     }
 
     //this hasn't been finished yet
-    public Object visit(ASTforStatement node, Object data){
+    public Object visit(ASTforStatement node, Context data){
 
         switch(node.jjtGetChild(0).getId()){
             case JJTFORHEADER :
@@ -318,7 +321,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
 
-    public Object visit(ASTexpressionStatement node, Object data){
+    public Object visit(ASTexpressionStatement node, Context data){
         EvaluationVisitor v = new EvaluationVisitor();
         return node.jjtGetChild(0).jjtAccept(v, data);
     }
@@ -327,15 +330,15 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
 
-    public Object visit(ASTtopStatement node, Object data){
+    public Object visit(ASTtopStatement node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
-    public Object visit(ASTtopStatements node, Object data){
+    public Object visit(ASTtopStatements node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
-    public Object visit(ASTprogram node, Object data){
+    public Object visit(ASTprogram node, Context data){
         node.childrenAccept(this, data);
         return 0;
     }

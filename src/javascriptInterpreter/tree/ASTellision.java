@@ -16,10 +16,10 @@ class ASTellision extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=ed90ad7900f2f7b826134afb7fdf112f (do not edit this line) */
+/* JavaCC - OriginalChecksum=d683e4d1f912493e7a297ecf2b08dd6f (do not edit this line) */

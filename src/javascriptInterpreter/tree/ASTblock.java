@@ -16,10 +16,10 @@ class ASTblock extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=0a64f820b2486e1edaccdec50c3bf5fb (do not edit this line) */
+/* JavaCC - OriginalChecksum=0488957f7ab880d61a6f0a2f61b2a9b6 (do not edit this line) */

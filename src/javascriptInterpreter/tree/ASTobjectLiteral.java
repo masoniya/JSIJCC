@@ -16,10 +16,10 @@ class ASTobjectLiteral extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=c9183519af20c205384e60725d38a196 (do not edit this line) */
+/* JavaCC - OriginalChecksum=6960f13412366548118cb4b9f56ed1ad (do not edit this line) */

@@ -16,10 +16,10 @@ class ASTifStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=325b2e2e2e2dbfd227cf0019725aedcc (do not edit this line) */
+/* JavaCC - OriginalChecksum=95c878858a1e5eadd301b7949106315a (do not edit this line) */

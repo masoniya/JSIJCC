@@ -16,10 +16,10 @@ class ASTcontinueStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=a215109b62ab722fd6bb5e3d17c0bdea (do not edit this line) */
+/* JavaCC - OriginalChecksum=360b1147995723ff5189b45e2142dc92 (do not edit this line) */

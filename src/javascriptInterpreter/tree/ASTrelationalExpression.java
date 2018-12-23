@@ -16,10 +16,10 @@ class ASTrelationalExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=b15588c63a921f0e1274b7e6291bc8f5 (do not edit this line) */
+/* JavaCC - OriginalChecksum=9a70bcbb9ce985f3c388602c41db1e42 (do not edit this line) */

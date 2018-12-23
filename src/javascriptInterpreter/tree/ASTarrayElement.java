@@ -16,10 +16,10 @@ class ASTarrayElement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=da9f1a6d34192bcd21e88a7e3c7748cb (do not edit this line) */
+/* JavaCC - OriginalChecksum=df41bd6e9e57d8da1d55840153b6dd50 (do not edit this line) */

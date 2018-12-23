@@ -16,10 +16,10 @@ class ASTadditiveExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=2316eb70d473892b1629dd08b6eef873 (do not edit this line) */
+/* JavaCC - OriginalChecksum=c3fe120cc100ba0ed38f9915ba4d74fd (do not edit this line) */

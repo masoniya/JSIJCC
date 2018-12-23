@@ -16,10 +16,10 @@ class ASTbitwiseOrExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=f5c09848bcadd6ad9c8cd7a7a3579e0e (do not edit this line) */
+/* JavaCC - OriginalChecksum=5c0868400d4e570744922eb74bceded2 (do not edit this line) */

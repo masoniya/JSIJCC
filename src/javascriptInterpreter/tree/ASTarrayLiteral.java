@@ -16,10 +16,10 @@ class ASTarrayLiteral extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=3ec04565acb517ab48b92ad61cdcf884 (do not edit this line) */
+/* JavaCC - OriginalChecksum=8c526e37275309186c552808a16b3c6d (do not edit this line) */

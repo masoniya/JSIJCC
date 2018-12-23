@@ -16,10 +16,10 @@ class ASTshiftExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=a0bec68ac993813340a6edcb9df03c63 (do not edit this line) */
+/* JavaCC - OriginalChecksum=a2a4804e1209ea4f59077477430216fb (do not edit this line) */

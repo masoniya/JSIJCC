@@ -16,10 +16,10 @@ class ASTtryStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=52f35226dc3ef6c6b41329ec21b0ca03 (do not edit this line) */
+/* JavaCC - OriginalChecksum=12f45eab74badb03b6f6d550344d55d5 (do not edit this line) */

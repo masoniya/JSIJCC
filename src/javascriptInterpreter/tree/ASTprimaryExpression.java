@@ -16,10 +16,10 @@ class ASTprimaryExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, Object data) {
+  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=324ef6bac9b1d2890df8598795ec7689 (do not edit this line) */
+/* JavaCC - OriginalChecksum=f0d31e4072f471864c51eed8f9312a84 (do not edit this line) */
