@@ -16,10 +16,10 @@ class ASTforInBinding extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=e66b9912822cae0ee05f6144693d31d3 (do not edit this line) */
+/* JavaCC - OriginalChecksum=b52b144c9f066bd891a908c2b75b7b31 (do not edit this line) */

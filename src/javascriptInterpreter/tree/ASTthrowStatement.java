@@ -16,10 +16,10 @@ class ASTthrowStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=497cf33ddca90404afeebe9e79961485 (do not edit this line) */
+/* JavaCC - OriginalChecksum=a5b403dd8fbf094ceed7b48d50a813f8 (do not edit this line) */

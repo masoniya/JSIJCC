@@ -16,10 +16,10 @@ class ASTforInitializer extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=64ab9161d30351c9e64f22413ea08a59 (do not edit this line) */
+/* JavaCC - OriginalChecksum=d5e7a86c088632e46450f0dc02b13d84 (do not edit this line) */

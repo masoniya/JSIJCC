@@ -16,10 +16,10 @@ class ASTpropertyDefinition extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=b3048542202cc21221c9f45d3a4f54ab (do not edit this line) */
+/* JavaCC - OriginalChecksum=beea94503d305ff0a55b96bd98b78d53 (do not edit this line) */

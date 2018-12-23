@@ -11,8 +11,17 @@
     6 + 7
 }*/
 
-var i = 1
 
-var j = i + 2
 
-i + j
+var x = 5 + 3
+var y = 5 * 3
+var x = 5 >> 3
+var x = 5 < 3
+var x = 5 == 3
+var x = 5 & 3
+var x = 5 | 3
+var x = 5 ^ 3
+var x = 5 && 3
+var x = 5 || 3
+var x = true ? 5 : 3
+var x = y = 3

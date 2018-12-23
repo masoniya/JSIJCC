@@ -16,10 +16,10 @@ class ASTelementList extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=7e3494174e127762f3f382f34a7f356a (do not edit this line) */
+/* JavaCC - OriginalChecksum=5457d723febda10ef8d017bb75f4d59d (do not edit this line) */

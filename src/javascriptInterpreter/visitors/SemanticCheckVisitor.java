@@ -4,9 +4,9 @@ package javascriptInterpreter.visitors;
 
 public class SemanticCheckVisitor extends JavascriptDefaultVisitor {
 
-    public Object visit(ASTexpressionStatement node, Context data){
+    /*public JavascriptType visit(ASTexpressionStatement node, Context data){
         node.dump(">");
         return defaultVisit(node, data);
-    }
+    }*/
 
 }

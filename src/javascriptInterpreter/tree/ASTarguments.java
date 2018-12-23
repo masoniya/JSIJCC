@@ -16,10 +16,10 @@ class ASTarguments extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=974bc27a803f08cef7885cca1b06a64f (do not edit this line) */
+/* JavaCC - OriginalChecksum=6314d2fab3e798e9c83860d1911f6eb8 (do not edit this line) */

@@ -16,10 +16,10 @@ class ASTmultiplicativeExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=fd02b305342f541ce1634b8858a02a95 (do not edit this line) */
+/* JavaCC - OriginalChecksum=1eba28526cd54c1c5fd8dd853a986d11 (do not edit this line) */

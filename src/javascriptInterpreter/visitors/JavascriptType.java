@@ -1,5 +1,8 @@
 package javascriptInterpreter.visitors;
 
+
+import javascriptInterpreter.tree.Node;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +16,8 @@ public class JavascriptType {
         BOOLEAN(2),
         STRING(3),
         NUMBER(4),
-        OBJECT(5);
+        OBJECT(5),
+        FUNCTION(6);
 
         int id;
         Type(int id){
@@ -25,6 +29,7 @@ public class JavascriptType {
 
     private Object value;
 
+    private String identifierName = null;
 
 
     public JavascriptType(){
@@ -71,7 +76,17 @@ public class JavascriptType {
     public JavascriptType(HashMap<String, JavascriptType> objectLiteral){
         this.type = Type.OBJECT;
 
-        //TODO object literal
+        JavascriptObject object = new JavascriptObject(objectLiteral);
+
+        this.value = object;
+
+        System.out.println("what the fuck");
+        object.printObject();
+    }
+
+    public JavascriptType(Node functionRoot){
+        this.type = Type.FUNCTION;
+        this.value = functionRoot;
     }
 
     public Type getType() {
@@ -82,11 +97,17 @@ public class JavascriptType {
         return value;
     }
 
+    public String getIdentifierName(){return identifierName;}
+
     public static class JavascriptObject {
         private Map<String, JavascriptType> properties;
 
         public JavascriptObject(){
+            properties = new HashMap<>();
+        }
 
+        public JavascriptObject(HashMap<String, JavascriptType> properties) {
+            this.properties = properties;
         }
 
         public void addProperty(String name, JavascriptType value){
@@ -99,6 +120,21 @@ public class JavascriptType {
 
         public JavascriptType getProperty(String name){
             return properties.get(name);
+        }
+
+        @Override
+        public String toString(){
+            String s = "";
+            for(JavascriptType obj : properties.values()){
+                s +=  obj.value + " ,";
+            }
+            return s;
+        }
+
+        public void printObject(){
+            for(String key : properties.keySet()){
+                System.out.println(key + " : " + properties.get(key));
+            }
         }
     }
 
@@ -128,6 +164,10 @@ public class JavascriptType {
 
     public JavascriptObject getJavascriptObject(){
         return (JavascriptObject)value;
+    }
+
+    public void setIdentifierName(String name){
+        this.identifierName = name;
     }
 
     /*public int getInt(){

@@ -16,10 +16,10 @@ class ASTtopStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=550d371d049ad77f86e3ff6617c87f8a (do not edit this line) */
+/* JavaCC - OriginalChecksum=5134dd6e6cdf1d3dc44bf9c6b453854c (do not edit this line) */

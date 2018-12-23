@@ -16,10 +16,10 @@ class ASTreturnStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=0cb0c16a99e4c24f62a24c36d20611b7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=208c4023af455df9ca44804e907c9048 (do not edit this line) */

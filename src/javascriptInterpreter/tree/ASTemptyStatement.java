@@ -16,10 +16,10 @@ class ASTemptyStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=428f54d12f2379105767e1c6b803e31d (do not edit this line) */
+/* JavaCC - OriginalChecksum=e2ef6ee8a09baf5da9783a2f0c72800a (do not edit this line) */

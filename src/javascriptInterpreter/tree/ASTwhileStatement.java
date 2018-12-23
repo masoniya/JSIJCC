@@ -16,10 +16,10 @@ class ASTwhileStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=6ed9887bab3de4443ffe188481f4060e (do not edit this line) */
+/* JavaCC - OriginalChecksum=cff030b4f2340f4db690322323dde46a (do not edit this line) */

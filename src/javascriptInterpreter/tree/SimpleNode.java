@@ -61,7 +61,7 @@ class SimpleNode implements Node {
   public void jjtSetLastToken(Token token) { this.lastToken = token; }
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data)
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data)
 {
     return visitor.visit(this, data);
   }
@@ -108,4 +108,4 @@ class SimpleNode implements Node {
   }
 }
 
-/* JavaCC - OriginalChecksum=64d795dd319ec60482f5926629ea2388 (do not edit this line) */
+/* JavaCC - OriginalChecksum=8fa9cbc5b509562f0ab077aea1a02ba2 (do not edit this line) */

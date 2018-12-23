@@ -16,10 +16,10 @@ class ASTcallExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=6d3ffae8fa5f407c1f0053db8d367c01 (do not edit this line) */
+/* JavaCC - OriginalChecksum=d8b0cc5480e508379fdea82d1e896933 (do not edit this line) */

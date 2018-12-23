@@ -4,216 +4,216 @@ package javascriptInterpreter.tree;
 import javascriptInterpreter.parser.*;
 
 public class JavascriptDefaultVisitor implements JavascriptVisitor{
-  public Object defaultVisit(SimpleNode node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType defaultVisit(SimpleNode node, javascriptInterpreter.visitors.Context data){
     node.childrenAccept(this, data);
-    return data;
+    return null;
   }
-  public Object visit(SimpleNode node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(SimpleNode node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTprimaryExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTprimaryExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTliteral node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTliteral node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTarrayLiteral node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTarrayLiteral node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTellision node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTellision node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTelementList node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTelementList node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTarrayElement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTarrayElement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTspreadElement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTspreadElement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTobjectLiteral node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTobjectLiteral node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTpropertyDefinition node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTpropertyDefinition node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTfunctionExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTfunctionExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTparenthesizedExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTparenthesizedExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTleftSideExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTleftSideExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcallExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcallExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTarguments node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTarguments node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTnewExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTnewExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTmemberExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTmemberExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTupdateExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTupdateExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTunaryExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTunaryExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTexponentiationOperator node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTexponentiationOperator node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTmultiplicativeExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTmultiplicativeExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTadditiveExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTadditiveExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTshiftExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTshiftExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTrelationalExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTrelationalExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTequalityExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTequalityExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTbitwiseAndExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTbitwiseAndExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTbitwiseXorExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTbitwiseXorExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTbitwiseOrExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTbitwiseOrExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTlogicalAndExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTlogicalAndExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTlogicalOrExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTlogicalOrExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTconditionalExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTconditionalExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTassignmentExpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTassignmentExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTexpression node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTexpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTstatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTstatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTemptyStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTemptyStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTexpressionStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTexpressionStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTvariableDefinition node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTvariableDefinition node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTvariableDeclarationList node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTvariableDeclarationList node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTvariableDeclaration node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTvariableDeclaration node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTblock node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTblock node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTlabeledStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTlabeledStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTifStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTifStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTswitchStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTswitchStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcaseBlock node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcaseBlock node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcaseClauses node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcaseClauses node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcaseClause node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcaseClause node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTdefaultClause node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTdefaultClause node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTdoStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTdoStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTwhileStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTwhileStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTforStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTforStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTforHeader node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTforHeader node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTforInitializer node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTforInitializer node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTforInHeader node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTforInHeader node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTforInBinding node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTforInBinding node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcontinueStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcontinueStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTbreakStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTbreakStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTreturnStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTreturnStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTthrowStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTthrowStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTtryStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTtryStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcatchClauses node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcatchClauses node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTcatchClause node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTcatchClause node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTfinallyClause node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTfinallyClause node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTnamedFunction node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTnamedFunction node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTanonymousFunction node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTanonymousFunction node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTformalParameters node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTformalParameters node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTfunctionBody node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTfunctionBody node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTtopStatement node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTtopStatement node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTtopStatements node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTtopStatements node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public Object visit(ASTprogram node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTprogram node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
 }
-/* JavaCC - OriginalChecksum=3313dcf2a7c68ead51472ab9337dd2cf (do not edit this line) */
+/* JavaCC - OriginalChecksum=00236ff5f5c3877da4376c1646244491 (do not edit this line) */

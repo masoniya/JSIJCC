@@ -12,7 +12,7 @@ options {
     MULTI = true;
     TRACK_TOKENS = true;
     VISITOR_DATA_TYPE = "javascriptInterpreter.visitors.Context";
-    //VISITOR_RETURN_TYPE //might be used for return type of expressions
+    VISITOR_RETURN_TYPE = "javascriptInterpreter.visitors.JavascriptType";
 
     JJTREE_OUTPUT_DIRECTORY = "javascriptInterpreter\\tree";
     NODE_PACKAGE = "javascriptInterpreter.tree";

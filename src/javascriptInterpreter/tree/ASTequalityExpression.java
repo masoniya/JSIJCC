@@ -16,10 +16,10 @@ class ASTequalityExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=a7a80fa1fbbc5fcdb9e2d2f7cfbbc817 (do not edit this line) */
+/* JavaCC - OriginalChecksum=9aa7860d6272ef5a88be585768c14d18 (do not edit this line) */

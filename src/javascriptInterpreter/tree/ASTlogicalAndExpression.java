@@ -16,10 +16,10 @@ class ASTlogicalAndExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=fdbc92203d18847ab2d19aa180d58b2c (do not edit this line) */
+/* JavaCC - OriginalChecksum=ea5b9c08687117a77a4d9f5af4f8b3d0 (do not edit this line) */

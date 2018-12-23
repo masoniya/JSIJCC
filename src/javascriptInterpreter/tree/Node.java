@@ -38,6 +38,6 @@ interface Node {
   public int getId();
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data);
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data);
 }
-/* JavaCC - OriginalChecksum=0354e92e09262c8ecda419d4a624c17c (do not edit this line) */
+/* JavaCC - OriginalChecksum=097183aa1feb949ac322956567f67add (do not edit this line) */

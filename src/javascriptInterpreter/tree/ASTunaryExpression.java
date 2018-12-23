@@ -16,10 +16,10 @@ class ASTunaryExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=0079a490bd9198a35ce2e8a6eeae2a25 (do not edit this line) */
+/* JavaCC - OriginalChecksum=8a58b95c08d51cb640bfbb5fba0f2ac1 (do not edit this line) */

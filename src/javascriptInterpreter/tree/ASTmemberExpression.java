@@ -16,10 +16,10 @@ class ASTmemberExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=0179b6d29067e9abc97af8aff7e58377 (do not edit this line) */
+/* JavaCC - OriginalChecksum=f366021c9365bc4840f3f71a4459bd7d (do not edit this line) */

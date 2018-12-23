@@ -16,10 +16,10 @@ class ASTcaseClauses extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=3faff9ff449981be3239c7a52bcce1f7 (do not edit this line) */
+/* JavaCC - OriginalChecksum=fb0743965696bfd68c48eb36b91a1eae (do not edit this line) */

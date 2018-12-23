@@ -16,10 +16,10 @@ class ASTconditionalExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=8243833be5b9e5af44edbf2c251ae5ed (do not edit this line) */
+/* JavaCC - OriginalChecksum=22d931ac6c5a8fd77b812719e46ec273 (do not edit this line) */

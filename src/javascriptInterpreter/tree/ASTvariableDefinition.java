@@ -16,10 +16,10 @@ class ASTvariableDefinition extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=9c055c869ee36c55c26ff1939aa236c4 (do not edit this line) */
+/* JavaCC - OriginalChecksum=bf65834d37ad4033b9a9c15e009af724 (do not edit this line) */

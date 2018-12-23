@@ -16,10 +16,10 @@ class ASTanonymousFunction extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=847d2f74e6afd584b606696f2956c03c (do not edit this line) */
+/* JavaCC - OriginalChecksum=b02f92cd64129eae1482614fb9dac71b (do not edit this line) */

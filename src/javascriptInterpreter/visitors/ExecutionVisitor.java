@@ -9,33 +9,33 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
 
-    public Object visit(ASTstatement node, Context data){
+    public JavascriptType visit(ASTstatement node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
 
-    public Object visit(ASTemptyStatement node, Context data){
+    public JavascriptType visit(ASTemptyStatement node, Context data){
         return null;
     }
 
-    public Object visit(ASTblock node, Context data){
+    public JavascriptType visit(ASTblock node, Context data){
         if(node.jjtGetNumChildren() > 0){
             node.childrenAccept(this, data);
         }
         return null;
     }
 
-    public Object visit(ASTvariableDefinition node, Context data){
+    public JavascriptType visit(ASTvariableDefinition node, Context data){
         DeclarationVisitor v = new DeclarationVisitor();
         return node.jjtAccept(v, data);
     }
 
 
 
-    public Object visit(ASTifStatement node, Context data){
+    public JavascriptType visit(ASTifStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(0);
         EvaluationVisitor v = new EvaluationVisitor();
-        double x = (double)condition.jjtAccept(v, data);
+        double x = condition.jjtAccept(v, data).getDouble();
         boolean conditionResult = JSToJavaUtils.doubleToBoolean(x);
 
         //has no else
@@ -57,7 +57,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
     }
 
     @SuppressWarnings("Duplicates")
-    public Object visit(ASTswitchStatement node, Context data){
+    public JavascriptType visit(ASTswitchStatement node, Context data){
 
         ASTcaseBlock caseBlock = (ASTcaseBlock) node.jjtGetChild(1);
         boolean matchedCase = false;
@@ -104,14 +104,14 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
         ASTexpression expression = (ASTexpression)node.jjtGetChild(0);
         EvaluationVisitor v = new EvaluationVisitor();
-        double x = (double)expression.jjtAccept(v, data);
+        double x = expression.jjtAccept(v, data).getDouble();
         int expressionEvaluation = (int)x;
 
 
         if(first != null){
             for(int i = 0; i < first.jjtGetNumChildren(); i++){
                 ASTcaseClause caseClause = (ASTcaseClause)first.jjtGetChild(i);
-                double y = (double)caseClause.jjtGetChild(0).jjtAccept(v, data);
+                double y = caseClause.jjtGetChild(0).jjtAccept(v, data).getDouble();
                 int caseEvaluation = (int)y;
                 //fallthrough
                 if(matchedCase){
@@ -136,7 +136,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         if(third != null){
             for(int i = 0; i < third.jjtGetNumChildren(); i++){
                 ASTcaseClause caseClause = (ASTcaseClause)third.jjtGetChild(i);
-                double y = (double)caseClause.jjtGetChild(0).jjtAccept(v, data);
+                double y = caseClause.jjtGetChild(0).jjtAccept(v, data).getDouble();
                 int caseEvaluation = (int)y;
                 //fallthrough
                 if(matchedCase){
@@ -167,7 +167,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         return null;
     }
 
-    public Object visit(ASTdoStatement node, Context data){
+    public JavascriptType visit(ASTdoStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(1);
         EvaluationVisitor v = new EvaluationVisitor();
         double x;
@@ -177,7 +177,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
             node.jjtGetChild(0).jjtAccept(this, data);
 
             //update condition
-            x = (double)condition.jjtAccept(v, data);
+            x = condition.jjtAccept(v, data).getDouble();
             conditionResult = JSToJavaUtils.doubleToBoolean(x);
         }
         while(conditionResult);
@@ -185,25 +185,24 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         return null;
     }
 
-    public Object visit(ASTwhileStatement node, Context data){
+    public JavascriptType visit(ASTwhileStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(0);
         EvaluationVisitor v = new EvaluationVisitor();
-        double x = (double)condition.jjtAccept(v, data);
+        double x = condition.jjtAccept(v, data).getDouble();
         boolean conditionResult = JSToJavaUtils.doubleToBoolean(x);
 
         while(conditionResult){
             node.jjtGetChild(1).jjtAccept(this, data);
 
             //update condition
-            x = (double)condition.jjtAccept(v, data);
+            x = condition.jjtAccept(v, data).getDouble();
             conditionResult = JSToJavaUtils.doubleToBoolean(x);
         }
 
         return null;
     }
 
-    //this hasn't been finished yet
-    public Object visit(ASTforStatement node, Context data){
+    public JavascriptType visit(ASTforStatement node, Context data){
 
         switch(node.jjtGetChild(0).getId()){
             case JJTFORHEADER :
@@ -281,11 +280,11 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
                 //evaluate condition
                 if(second != null){
-                    x = (double)second.jjtAccept(v, data);
+                    x = second.jjtAccept(v, data).getDouble();
                     conditionResult = JSToJavaUtils.doubleToBoolean(x);
                 }
 
-
+                //the final loop
                 for(;Main.loopTicks++ < 10;){
                     //execute loop body
                     node.jjtGetChild(1).jjtAccept(this, data);
@@ -299,7 +298,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
                     //update condition
                     if(second != null){
                         System.out.println("I have a condition");
-                        x = (double)second.jjtAccept(v, data);
+                        x = second.jjtAccept(v, data).getDouble();
                         conditionResult = JSToJavaUtils.doubleToBoolean(x);
                     }
                 }
@@ -321,7 +320,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
 
-    public Object visit(ASTexpressionStatement node, Context data){
+    public JavascriptType visit(ASTexpressionStatement node, Context data){
         EvaluationVisitor v = new EvaluationVisitor();
         return node.jjtGetChild(0).jjtAccept(v, data);
     }
@@ -330,16 +329,16 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
 
-    public Object visit(ASTtopStatement node, Context data){
+    public JavascriptType visit(ASTtopStatement node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
-    public Object visit(ASTtopStatements node, Context data){
+    public JavascriptType visit(ASTtopStatements node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
-    public Object visit(ASTprogram node, Context data){
+    public JavascriptType visit(ASTprogram node, Context data){
         node.childrenAccept(this, data);
-        return 0;
+        return null;
     }
 }

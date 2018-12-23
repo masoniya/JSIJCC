@@ -16,10 +16,10 @@ class ASTassignmentExpression extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=b5e002386ebbf3776f9c742cfa29e1de (do not edit this line) */
+/* JavaCC - OriginalChecksum=08ced930ef20330e31cc3fcd41d8fe1f (do not edit this line) */

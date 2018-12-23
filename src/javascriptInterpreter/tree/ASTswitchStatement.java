@@ -16,10 +16,10 @@ class ASTswitchStatement extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=e7bebe49f9072695bb3e3295dc0f01f2 (do not edit this line) */
+/* JavaCC - OriginalChecksum=3654f3d2fc7d5f6643a1ff410ea2c75a (do not edit this line) */

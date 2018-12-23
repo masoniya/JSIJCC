@@ -16,10 +16,10 @@ class ASTfinallyClause extends SimpleNode {
 
 
   /** Accept the visitor. **/
-  public Object jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
+  public javascriptInterpreter.visitors.JavascriptType jjtAccept(JavascriptVisitor visitor, javascriptInterpreter.visitors.Context data) {
 
     return
     visitor.visit(this, data);
   }
 }
-/* JavaCC - OriginalChecksum=8bc57e4288013b9252fbd8a0ce174f8d (do not edit this line) */
+/* JavaCC - OriginalChecksum=5391ddc9ad7085e841da76e689795ac0 (do not edit this line) */
