@@ -5,7 +5,6 @@ import javascriptInterpreter.tree.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import static javascriptInterpreter.visitors.JSToJavaUtils.*;
 
@@ -100,7 +99,7 @@ public class JavascriptType {
     public String getIdentifierName(){return identifierName;}
 
     public static class JavascriptObject {
-        private Map<String, JavascriptType> properties;
+        private HashMap<String, JavascriptType> properties;
 
         public JavascriptObject(){
             properties = new HashMap<>();
@@ -154,6 +153,10 @@ public class JavascriptType {
         return (String)value;
     }
 
+    public int getInt(){
+        return (int)(double)value;
+    }
+
     public double getDouble(){
         return (double)value;
     }
@@ -170,8 +173,5 @@ public class JavascriptType {
         this.identifierName = name;
     }
 
-    /*public int getInt(){
-        return (int)value;
-    }*/
 
 }

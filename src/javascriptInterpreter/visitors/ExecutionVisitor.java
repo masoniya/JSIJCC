@@ -5,6 +5,7 @@ import javascriptInterpreter.tree.*;
 
 import static javascriptInterpreter.tree.JavascriptTreeConstants.*;
 
+
 public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
@@ -19,24 +20,19 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
     }
 
     public JavascriptType visit(ASTblock node, Context data){
-        if(node.jjtGetNumChildren() > 0){
-            node.childrenAccept(this, data);
-        }
+        node.childrenAccept(this, data);
         return null;
     }
 
     public JavascriptType visit(ASTvariableDefinition node, Context data){
-        DeclarationVisitor v = new DeclarationVisitor();
-        return node.jjtAccept(v, data);
+        return node.jjtAccept(new DeclarationVisitor(), data);
     }
 
 
 
     public JavascriptType visit(ASTifStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(0);
-        EvaluationVisitor v = new EvaluationVisitor();
-        double x = condition.jjtAccept(v, data).getDouble();
-        boolean conditionResult = JSToJavaUtils.doubleToBoolean(x);
+        boolean conditionResult = condition.jjtAccept(new EvaluationVisitor(), data).getBoolean();
 
         //has no else
         if(node.jjtGetNumChildren() == 2){
@@ -103,16 +99,13 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         }
 
         ASTexpression expression = (ASTexpression)node.jjtGetChild(0);
-        EvaluationVisitor v = new EvaluationVisitor();
-        double x = expression.jjtAccept(v, data).getDouble();
-        int expressionEvaluation = (int)x;
+        int expressionEvaluation = expression.jjtAccept(new EvaluationVisitor(), data).getInt();
 
 
         if(first != null){
             for(int i = 0; i < first.jjtGetNumChildren(); i++){
                 ASTcaseClause caseClause = (ASTcaseClause)first.jjtGetChild(i);
-                double y = caseClause.jjtGetChild(0).jjtAccept(v, data).getDouble();
-                int caseEvaluation = (int)y;
+                int caseEvaluation = caseClause.jjtGetChild(0).jjtAccept(new EvaluationVisitor(), data).getInt();
                 //fallthrough
                 if(matchedCase){
                     caseClause.jjtGetChild(1).jjtAccept(this, data);
@@ -136,8 +129,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         if(third != null){
             for(int i = 0; i < third.jjtGetNumChildren(); i++){
                 ASTcaseClause caseClause = (ASTcaseClause)third.jjtGetChild(i);
-                double y = caseClause.jjtGetChild(0).jjtAccept(v, data).getDouble();
-                int caseEvaluation = (int)y;
+                int caseEvaluation = caseClause.jjtGetChild(0).jjtAccept(new EvaluationVisitor(), data).getInt();
                 //fallthrough
                 if(matchedCase){
                     caseClause.jjtGetChild(1).jjtAccept(this, data);
@@ -151,7 +143,7 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
             }
         }
 
-        //execute default block if not cases are matched
+        //execute default block if no cases are matched
         if(second != null && !matchedCase){
             second.jjtGetChild(0).jjtAccept(this, data);
 
@@ -169,16 +161,13 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
     public JavascriptType visit(ASTdoStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(1);
-        EvaluationVisitor v = new EvaluationVisitor();
-        double x;
         boolean conditionResult;
 
         do{
             node.jjtGetChild(0).jjtAccept(this, data);
 
             //update condition
-            x = condition.jjtAccept(v, data).getDouble();
-            conditionResult = JSToJavaUtils.doubleToBoolean(x);
+            conditionResult = condition.jjtAccept(new EvaluationVisitor(), data).getBoolean();
         }
         while(conditionResult);
 
@@ -187,16 +176,13 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
     public JavascriptType visit(ASTwhileStatement node, Context data){
         ASTexpression condition = (ASTexpression)node.jjtGetChild(0);
-        EvaluationVisitor v = new EvaluationVisitor();
-        double x = condition.jjtAccept(v, data).getDouble();
-        boolean conditionResult = JSToJavaUtils.doubleToBoolean(x);
+        boolean conditionResult = condition.jjtAccept(new EvaluationVisitor(), data).getBoolean();
 
         while(conditionResult){
             node.jjtGetChild(1).jjtAccept(this, data);
 
             //update condition
-            x = condition.jjtAccept(v, data).getDouble();
-            conditionResult = JSToJavaUtils.doubleToBoolean(x);
+            conditionResult = condition.jjtAccept(new EvaluationVisitor(), data).getBoolean();
         }
 
         return null;
@@ -264,42 +250,37 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
                     }
                 }
 
-                EvaluationVisitor v = new EvaluationVisitor();
                 //execute initializer
                 if(first != null){
                     if(first.jjtGetChild(0).getId() == JJTEXPRESSION){
-                        first.jjtAccept(v, data);
+                        first.jjtAccept(new EvaluationVisitor(), data);
                     }
                     else{
                         first.jjtAccept(this, data);
                     }
                 }
 
-                double x;
                 boolean conditionResult = true;
 
                 //evaluate condition
                 if(second != null){
-                    x = second.jjtAccept(v, data).getDouble();
-                    conditionResult = JSToJavaUtils.doubleToBoolean(x);
+                    conditionResult = second.jjtAccept(new EvaluationVisitor(), data).getBoolean();
                 }
 
                 //the final loop
-                for(;Main.loopTicks++ < 10;){
+                for(;conditionResult;){
                     //execute loop body
                     node.jjtGetChild(1).jjtAccept(this, data);
 
 
                     //execute loop last expression
                     if(third != null){
-                        third.jjtAccept(v, data);
+                        third.jjtAccept(new EvaluationVisitor(), data);
                     }
 
                     //update condition
                     if(second != null){
-                        System.out.println("I have a condition");
-                        x = second.jjtAccept(v, data).getDouble();
-                        conditionResult = JSToJavaUtils.doubleToBoolean(x);
+                        conditionResult = second.jjtAccept(new EvaluationVisitor(), data).getBoolean();
                     }
                 }
                 break;
@@ -321,11 +302,8 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
 
 
     public JavascriptType visit(ASTexpressionStatement node, Context data){
-        EvaluationVisitor v = new EvaluationVisitor();
-        return node.jjtGetChild(0).jjtAccept(v, data);
+        return node.jjtGetChild(0).jjtAccept(new EvaluationVisitor(), data);
     }
-
-
 
 
 
@@ -333,10 +311,12 @@ public class ExecutionVisitor extends JavascriptDefaultVisitor {
         node.childrenAccept(this, data);
         return null;
     }
+
     public JavascriptType visit(ASTtopStatements node, Context data){
         node.childrenAccept(this, data);
         return null;
     }
+
     public JavascriptType visit(ASTprogram node, Context data){
         node.childrenAccept(this, data);
         return null;

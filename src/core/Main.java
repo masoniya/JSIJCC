@@ -7,7 +7,7 @@ import javascriptInterpreter.visitors.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String args[]) throws ParseException {
+    public static void main(String args[]) {
         try{
             InputStream in = new FileInputStream("scripts/expression.js");
             Javascript parser = new Javascript(in);
@@ -22,7 +22,7 @@ public class Main {
             e.printStackTrace();
         }catch(ParseException e){
             System.out.println("Syntax error");
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

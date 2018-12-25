@@ -2,7 +2,6 @@ package javascriptInterpreter.visitors;
 
 import javascriptInterpreter.tree.*;
 
-import static javascriptInterpreter.visitors.JSToJavaUtils.*;
 
 public class DeclarationVisitor extends JavascriptDefaultVisitor {
 
@@ -22,9 +21,9 @@ public class DeclarationVisitor extends JavascriptDefaultVisitor {
 
         if(node.jjtGetNumChildren() > 0){
             ASTassignmentExpression valueNode = (ASTassignmentExpression) node.jjtGetChild(0);
-            EvaluationVisitor v = new EvaluationVisitor();
-            identifierValue = (JavascriptType)valueNode.jjtAccept(v, data);
+            identifierValue = valueNode.jjtAccept(new EvaluationVisitor(), data);
         }
+
         identifierValue.setIdentifierName(identifierName);
         System.out.println("adding identifier : " + identifierName);
         data.addIdentifier(identifierName, identifierValue);
@@ -38,4 +37,5 @@ public class DeclarationVisitor extends JavascriptDefaultVisitor {
 
         return (v, data);
     }*/
+
 }
