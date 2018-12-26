@@ -166,15 +166,8 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
         return child.jjtAccept(this, data);
     }
 
-    //todo implement call and new
     public JavascriptType visit(ASTleftSideExpression node, Context data){
-        Node child = node.jjtGetChild(0);
-        if(child.getId() == JJTCALLEXPRESSION){
-            return child.jjtAccept(this, data);
-        }
-        else{
-            return child.jjtAccept(this, data);
-        }
+        return node.jjtGetChild(0).jjtAccept(this, data);
     }
 
     //todo implement and fix syntax
@@ -192,7 +185,7 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
     }
 
 
-    //todo fix
+    //todo fix assignment in postfix update
     public JavascriptType visit(ASTupdateExpression node, Context data){
         ASTleftSideExpression operand = (ASTleftSideExpression)node.jjtGetChild(0);
 
@@ -243,7 +236,7 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
     }
 
 
-    //todo fix syntax of + and - and implement delete, void and typeof
+    //todo implement delete, void and typeof
     public JavascriptType visit(ASTunaryExpression node, Context data){
         ASTupdateExpression operand = (ASTupdateExpression)node.jjtGetChild(0);
         if(node.jjtGetFirstToken() != operand.jjtGetFirstToken()){
@@ -268,10 +261,10 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
         return operand.jjtAccept(this, data);
     }
 
-    public JavascriptType visit(ASTexponentiationOperator node, Context data){
+    public JavascriptType visit(ASTexponentiationExpression node, Context data){
         ASTunaryExpression firstOperand = (ASTunaryExpression)node.jjtGetChild(0);
         if(node.jjtGetNumChildren() > 1){
-            ASTexponentiationOperator secondOperand = (ASTexponentiationOperator)node.jjtGetChild(1);
+            ASTexponentiationExpression secondOperand = (ASTexponentiationExpression)node.jjtGetChild(1);
             double x = firstOperand.jjtAccept(this, data).getDouble();
             double y = secondOperand.jjtAccept(this, data).getDouble();
             String operator = ((SimpleNode)node.jjtGetChild(0)).jjtGetLastToken().next.image;
@@ -286,26 +279,31 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
     }
 
     public JavascriptType visit(ASTmultiplicativeExpression node, Context data){
-        ASTexponentiationOperator firstOperand = (ASTexponentiationOperator)node.jjtGetChild(0);
+        //two or more operands
         if(node.jjtGetNumChildren() > 1){
-            ASTmultiplicativeExpression secondOperand = (ASTmultiplicativeExpression)node.jjtGetChild(1);
-            double x = firstOperand.jjtAccept(this, data).getDouble();
-            double y = secondOperand.jjtAccept(this, data).getDouble();
-            String operator = ((SimpleNode)node.jjtGetChild(0)).jjtGetLastToken().next.image;
-            System.out.print(x + " " + operator + " " + y + " = ");
-            switch(operator){
-                case "*" :
-                    System.out.println(x * y);
-                    return new JavascriptType(x * y);
-                case "/" :
-                    System.out.println(x / y);
-                    return new JavascriptType(x / y);
-                case "%" :
-                    System.out.println(x % y);
-                    return new JavascriptType(x % y);
+            double result = node.jjtGetChild(0).jjtAccept(this, data).getDouble();
+            for(int i = 1; i < node.jjtGetNumChildren(); i++){
+                String nextOperator = ((SimpleNode)node.jjtGetChild(i - 1)).jjtGetLastToken().next.image;
+                double nextOperand = node.jjtGetChild(i).jjtAccept(this, data).getDouble();
+                System.out.print(result + " " + nextOperator + " " + nextOperand + " = ");
+                switch(nextOperator){
+                    case "*" :
+                        System.out.println(result * nextOperand);
+                        result *= nextOperand;
+                        break;
+                    case "/" :
+                        System.out.println(result / nextOperand);
+                        result /= nextOperand;
+                        break;
+                    case "%" :
+                        System.out.println(result % nextOperand);
+                        result %= nextOperand;
+                        break;
+                }
             }
+            return new JavascriptType(result);
         }
-        return firstOperand.jjtAccept(this, data);
+        return node.jjtGetChild(0).jjtAccept(this, data);
     }
 
     public JavascriptType visit(ASTadditiveExpression node, Context data){
@@ -564,7 +562,6 @@ public class EvaluationVisitor extends JavascriptDefaultVisitor {
         for(int i = 1; i < node.jjtGetNumChildren(); i++){
             node.jjtGetChild(i).jjtAccept(this, data);
         }
-
         return expressionValue;
     }
 

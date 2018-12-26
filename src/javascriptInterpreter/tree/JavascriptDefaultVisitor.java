@@ -65,7 +65,7 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
   public javascriptInterpreter.visitors.JavascriptType visit(ASTunaryExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
-  public javascriptInterpreter.visitors.JavascriptType visit(ASTexponentiationOperator node, javascriptInterpreter.visitors.Context data){
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTexponentiationExpression node, javascriptInterpreter.visitors.Context data){
     return defaultVisit(node, data);
   }
   public javascriptInterpreter.visitors.JavascriptType visit(ASTmultiplicativeExpression node, javascriptInterpreter.visitors.Context data){
@@ -216,4 +216,4 @@ public class JavascriptDefaultVisitor implements JavascriptVisitor{
     return defaultVisit(node, data);
   }
 }
-/* JavaCC - OriginalChecksum=00236ff5f5c3877da4376c1646244491 (do not edit this line) */
+/* JavaCC - OriginalChecksum=c32a2945f685a9547f2a361613ea93b5 (do not edit this line) */

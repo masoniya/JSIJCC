@@ -24,7 +24,7 @@ public interface JavascriptTreeConstants
   public int JJTMEMBEREXPRESSION = 16;
   public int JJTUPDATEEXPRESSION = 17;
   public int JJTUNARYEXPRESSION = 18;
-  public int JJTEXPONENTIATIONOPERATOR = 19;
+  public int JJTEXPONENTIATIONEXPRESSION = 19;
   public int JJTMULTIPLICATIVEEXPRESSION = 20;
   public int JJTADDITIVEEXPRESSION = 21;
   public int JJTSHIFTEXPRESSION = 22;
@@ -96,7 +96,7 @@ public interface JavascriptTreeConstants
     "memberExpression",
     "updateExpression",
     "unaryExpression",
-    "exponentiationOperator",
+    "exponentiationExpression",
     "multiplicativeExpression",
     "additiveExpression",
     "shiftExpression",
@@ -148,4 +148,4 @@ public interface JavascriptTreeConstants
     "program",
   };
 }
-/* JavaCC - OriginalChecksum=77e77bc19d5196fa0ac6fae14ee19118 (do not edit this line) */
+/* JavaCC - OriginalChecksum=254378d02841c8425c9b65f76e5cf250 (do not edit this line) */

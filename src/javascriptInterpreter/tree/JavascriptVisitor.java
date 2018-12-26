@@ -24,7 +24,7 @@ public interface JavascriptVisitor
   public javascriptInterpreter.visitors.JavascriptType visit(ASTmemberExpression node, javascriptInterpreter.visitors.Context data);
   public javascriptInterpreter.visitors.JavascriptType visit(ASTupdateExpression node, javascriptInterpreter.visitors.Context data);
   public javascriptInterpreter.visitors.JavascriptType visit(ASTunaryExpression node, javascriptInterpreter.visitors.Context data);
-  public javascriptInterpreter.visitors.JavascriptType visit(ASTexponentiationOperator node, javascriptInterpreter.visitors.Context data);
+  public javascriptInterpreter.visitors.JavascriptType visit(ASTexponentiationExpression node, javascriptInterpreter.visitors.Context data);
   public javascriptInterpreter.visitors.JavascriptType visit(ASTmultiplicativeExpression node, javascriptInterpreter.visitors.Context data);
   public javascriptInterpreter.visitors.JavascriptType visit(ASTadditiveExpression node, javascriptInterpreter.visitors.Context data);
   public javascriptInterpreter.visitors.JavascriptType visit(ASTshiftExpression node, javascriptInterpreter.visitors.Context data);
@@ -75,4 +75,4 @@ public interface JavascriptVisitor
   public javascriptInterpreter.visitors.JavascriptType visit(ASTtopStatements node, javascriptInterpreter.visitors.Context data);
   public javascriptInterpreter.visitors.JavascriptType visit(ASTprogram node, javascriptInterpreter.visitors.Context data);
 }
-/* JavaCC - OriginalChecksum=b6f36d616de786f346fe43486ee915a4 (do not edit this line) */
+/* JavaCC - OriginalChecksum=ba748ab52fc444b7e8e914ca8ed2d70d (do not edit this line) */

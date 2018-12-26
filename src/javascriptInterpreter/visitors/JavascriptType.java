@@ -139,10 +139,7 @@ public class JavascriptType {
 
 
     private Object parseValue(Type type, String s){
-        Object value = null;
-
         switch(type){
-            case UNDEFINED : return null ;
             case NULL : return 0.0;
             case STRING : return s;
         }

@@ -9,7 +9,7 @@ import java.io.*;
 public class Main {
     public static void main(String args[]) {
         try{
-            InputStream in = new FileInputStream("scripts/expression.js");
+            InputStream in = new FileInputStream("scripts/order.js");
             Javascript parser = new Javascript(in);
             SimpleNode s = parser.program();
 

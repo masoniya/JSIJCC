@@ -279,19 +279,19 @@ void unaryExpression() : {}
     (<DELETE> | <VOID> | <TYPEOF> | "~" | "!" | "-" | "+")* updateExpression()
 }
 
-void exponentiationOperator() : {}
+void exponentiationExpression() : {}
 {
-    unaryExpression() ("**" exponentiationOperator())?
+    unaryExpression() ("**" unaryExpression())?
 }
 
 void multiplicativeExpression() : {}
 {
-    exponentiationOperator() (("*" | "/" | "%") multiplicativeExpression())?
+    exponentiationExpression() (("*" | "/" | "%") exponentiationExpression())*
 }
 
 void additiveExpression() : {}
 {
-    multiplicativeExpression() (LOOKAHEAD("+" | "-")("+" | "-") additiveExpression())?
+    multiplicativeExpression() (LOOKAHEAD("+" | "-")("+" | "-") multiplicativeExpression())*
 }
 
 void shiftExpression() : {}

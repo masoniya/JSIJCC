@@ -761,16 +761,16 @@ void unaryExpression() : {/*@bgen(jjtree) unaryExpression */
 /*@egen*/
 }
 
-void exponentiationOperator() : {/*@bgen(jjtree) exponentiationOperator */
-  ASTexponentiationOperator jjtn000 = new ASTexponentiationOperator(JJTEXPONENTIATIONOPERATOR);
+void exponentiationExpression() : {/*@bgen(jjtree) exponentiationExpression */
+  ASTexponentiationExpression jjtn000 = new ASTexponentiationExpression(JJTEXPONENTIATIONEXPRESSION);
   boolean jjtc000 = true;
   jjtree.openNodeScope(jjtn000);
   jjtn000.jjtSetFirstToken(getToken(1));
 /*@egen*/}
-{/*@bgen(jjtree) exponentiationOperator */
+{/*@bgen(jjtree) exponentiationExpression */
     try {
 /*@egen*/
-    unaryExpression() ("**" exponentiationOperator())?/*@bgen(jjtree)*/
+    unaryExpression() ("**" unaryExpression())?/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -803,7 +803,7 @@ void multiplicativeExpression() : {/*@bgen(jjtree) multiplicativeExpression */
 {/*@bgen(jjtree) multiplicativeExpression */
     try {
 /*@egen*/
-    exponentiationOperator() (("*" | "/" | "%") multiplicativeExpression())?/*@bgen(jjtree)*/
+    exponentiationExpression() (("*" | "/" | "%") exponentiationExpression())*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
@@ -836,7 +836,7 @@ void additiveExpression() : {/*@bgen(jjtree) additiveExpression */
 {/*@bgen(jjtree) additiveExpression */
     try {
 /*@egen*/
-    multiplicativeExpression() (LOOKAHEAD("+" | "-")("+" | "-") additiveExpression())?/*@bgen(jjtree)*/
+    multiplicativeExpression() (LOOKAHEAD("+" | "-")("+" | "-") multiplicativeExpression())*/*@bgen(jjtree)*/
     } catch (Throwable jjte000) {
       if (jjtc000) {
         jjtree.clearNodeScope(jjtn000);
